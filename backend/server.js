@@ -2,12 +2,14 @@ const express = require("express");
 const dataConnection = require("./config/database");
 const userModel = require("./models/User.model");
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 const productRoutes = require("./routes/products.route");
+const cors = require("cors");
 require("dotenv").config(); // read env file
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello server");
@@ -30,37 +32,36 @@ app.post("/signup", (req, res) => {
 });
 
 // Login Process
-app.post("/login", async(req, res) => {
-    const {email,password} = req.body
-    try {
-        const hash =await userModel.findOne({email})
-        //  res.send(JSON.stringify(hash.password))
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const hash = await userModel.findOne({ email });
+    //  res.send(JSON.stringify(hash.password))
 
-        bcrypt.compare(password, hash.password, function(err, result) {
-            // res.send(result)
-        if(result){  
-            const token = jwt.sign({ userId: hash._id }, 'shhhhh');
-            res.send(token)
-           const loginuser = req.body;
-           res.send(loginuser)
-
-       }else{
-        res.send(err)
-       }
+    bcrypt.compare(password, hash.password, function (err, result) {
+      // res.send(result)
+      if (result) {
+        const token = jwt.sign({ userId: hash._id }, "shhhhh");
+        // res.send(token)
+        const loginuser = req.body;
+        res.send(loginuser);
+      } else {
+        res.send(err);
+      }
     });
   } catch (err) {
     console.log(err);
   }
 });
 
-
-app.use("/products", productRoutes)
+// Product Route
+app.use("/products", productRoutes);
 
 // console.log(process.env.PORT)
 app.listen(process.env.PORT, async (req, res) => {
   try {
     await dataConnection;
-    console.log(`Connection Connected With Database http://localhost:8080`);
+    console.log(`Connection Connected With Database http://localhost:8081`);
   } catch (err) {
     console.log(err);
   }
