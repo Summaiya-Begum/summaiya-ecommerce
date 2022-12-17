@@ -14,16 +14,51 @@ const getProduct = (payload) => {
 const getFailure = () => {
   return { type: types.PRODUCT_FETCH_FAILURE };
 };
-export const fetchProduct = () => (dispatch) => {
-  dispatch(getRequest());
-  return axios
-    .get(`http://localhost:8081/products`)
-    .then((res) => dispatch(getProduct(res.data)))
-    .catch((err) => dispatch(getFailure(err)));
+export const fetchProduct =
+  ({ filter, sort, page, limit }) =>
+  (dispatch) => {
+    dispatch(getRequest());
+    return (
+      axios
+        .get(
+          `http://localhost:8081/products?filter=${filter}&sort=${sort}&page=${page}&limit=${limit}`
+        )
+        .then((res)=>console.log(res.data))
+        .then((res) => dispatch(getProduct(res.data)))
+        .catch((err) => dispatch(getFailure(err)))
+    );
+  };
+
+//  Sort By Price
+export const sortProduct = (payload) => {
+  return {
+    type: types.SORT_PRODUCT,
+    payload,
+  };
 };
 
-export const filterProduct =(payload)=>{
-  return{
-    type:types.FILTER_PRODUCT,payload
-  }
-}
+// Filter By Category
+export const filterProduct = (payload) => {
+  return {
+    type: types.FILTER_PRODUCT,
+    payload,
+  };
+};
+
+//  PAGINATION
+
+// Limit
+export const changeLimitProduct = (payload) => {
+  return {
+    type: types.SET_LIMIT_PRODUCT,
+    payload,
+  };
+};
+
+// Page
+export const changePageProduct = (payload) => {
+  return {
+    type: types.SET_PAGE_PRODUCT,
+    payload,
+  };
+};

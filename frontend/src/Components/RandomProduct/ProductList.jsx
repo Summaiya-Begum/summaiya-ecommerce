@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Stack, Image, Text, Heading, ButtonGroup, Button, Divider } from '@chakra-ui/react'
+import { Box, Stack, Image, Text, Heading, Button, Divider } from '@chakra-ui/react'
 import { GiHearts } from "react-icons/gi"
 import { HiShoppingBag } from "react-icons/hi"
 import { useState } from 'react'
@@ -14,7 +14,7 @@ const handleMore = () => {
 
   return (
     <Box height={'auto'} boxShadow='2xl' p='4' rounded='md' bg='white'>
-      <Stack direction={['row', 'column']} spacing='15px' textAlign={'start'}>
+      <Stack direction={['row', 'column']} spacing='12px' textAlign={'start'}>
         <Box>
           <Image
             boxSize='fit'
@@ -75,18 +75,19 @@ const handleMore = () => {
             m={'auto'}
             gap={2}
           >
+           
             <Button
               w={180}
-              colorScheme='purple'
-              variant='solid'
+              bg='#E80070'
+              // variant='solid'
               fontWeight={'bold'}
             >
-              <GiHearts size={25} color='red' /></Button>
+              <GiHearts size={25} color='white' /></Button>
             <Divider orientation='vertical' />
             <Button
               w={180}
-              colorScheme='purple'
-              variant='solid'
+              bg='#E80070'
+              // variant='solid'
               fontWeight={'bold'}
             >
               <HiShoppingBag size={25} color='white' /></Button>

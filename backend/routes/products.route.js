@@ -4,11 +4,28 @@ const productRoutes = express.Router();
 
 productRoutes.get("/", async (req, res) => {
   // const token = req.headers
-  const query = req.query;
-  const data = await productModel.find();
-  res.send({ msg: "Request Successfull", data });
-});
+  const { filter, sort, page, limit } = req.query;
 
+  if (filter !==undefined) {
+    const result = await productModel
+      .find({
+        "category.name": filter,
+      })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .sort({ price: sort == "asc" ? 1 : -1 });
+    console.log(result);
+    return await res.send({msg:"Data Fullfilled Success",data:result});
+  } else {
+    const result = await productModel
+      .find({})
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .sort({ price: sort == "asc" ? 1 : -1 });
+    console.log(result);
+    return await res.send({msg:"Data Fullfilled Success",data:result});
+  }
+});
 
 // Data Post
 productRoutes.post("/create", async (req, res) => {
@@ -16,7 +33,6 @@ productRoutes.post("/create", async (req, res) => {
   const newData = await productModel.insertMany(productdata);
   res.status(200).send({ msg: "Product Data Added Successfully", newData });
 });
-
 
 // Change Data
 productRoutes.patch("/patch/:id", async (req, res) => {
@@ -35,4 +51,3 @@ productRoutes.delete("/delete/:id", async (req, res) => {
 });
 
 module.exports = productRoutes;
-

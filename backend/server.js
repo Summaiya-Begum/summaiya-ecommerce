@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const productRoutes = require("./routes/products.route");
 const cors = require("cors");
+const authentication = require("./middleware/authentication");
 require("dotenv").config(); // read env file
 
 const app = express();
@@ -16,17 +17,23 @@ app.get("/", (req, res) => {
 });
 
 // Sing up Process
-app.post("/signup", (req, res) => {
-  const { password } = req.body;
+app.post("/signup", async (req, res) => {
+  const { password, email } = req.body;
   try {
-    bcrypt.hash(password, 6, async function (err, hash) {
-      const user = new userModel({ ...req.body, password: hash });
-      await user.save();
-      res.send({ msg: "User Sign up successfull", user });
-    });
+    let user = await userModel.findOne({ email });
+    console.log(user)
+    if (!user) {
+      bcrypt.hash(password, 6, async function (err, hash) {
+        const newuser = new userModel({ ...req.body, password: hash });
+        await newuser.save();
+      });
+      return res.send({ msg: "User Sign Up Successfull"});
+    } else {
+      return res.send({ msg: "User Is Already Signed up" });
+    }
   } catch (err) {
     console.log(err);
-    res.status(404).send("signup failed");
+    res.status(404).send({ msg: "Signup Failed" });
   }
   // console.log(user)
 });
@@ -41,12 +48,11 @@ app.post("/login", async (req, res) => {
     bcrypt.compare(password, hash.password, function (err, result) {
       // res.send(result)
       if (result) {
-        const token = jwt.sign({ userId: hash._id }, "shhhhh");
+        const token = jwt.sign({ userId: hash._id }, process.env.SCERET_KEY);
         // res.send(token)
-        const loginuser = req.body;
-        res.send(loginuser);
+        res.send({ msg: "Login Successful",  token});
       } else {
-        res.send(err);
+        res.send({ msg: "Login Failed", err });
       }
     });
   } catch (err) {
@@ -55,6 +61,7 @@ app.post("/login", async (req, res) => {
 });
 
 // Product Route
+// app.use(authentication)
 app.use("/products", productRoutes);
 
 // console.log(process.env.PORT)

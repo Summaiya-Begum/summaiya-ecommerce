@@ -1,11 +1,11 @@
-
-import './App.css';
-import Product from './Components/RandomProduct/Product';
+import "./App.css";
+import Navbar from "./Components/Navbar";
+import AllRoutes from "./pages/AllRoutes";
 function App() {
-
   return (
     <div className="App">
-    <Product/>
+      <Navbar />
+      <AllRoutes />
     </div>
   );
 }

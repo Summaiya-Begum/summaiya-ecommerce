@@ -1,14 +1,13 @@
-import { filter } from "@chakra-ui/react";
 import * as types from "./product.actionType";
 const initState = {
   data: [],
   isLoading: false,
   isError: false,
   page: 1,
-  limit: 10,
-  currentData: {},
-  msg:null,
-  filterData:[]
+  limit: 12,
+  sort: null,
+  filter: null,
+  msg: null,
 };
 
 export const productReducer = (state = initState, action) => {
@@ -26,22 +25,35 @@ export const productReducer = (state = initState, action) => {
         isLoading: false,
         isError: false,
         data: payload.data,
-        filterData:payload.data,
-        msg:payload.msg
+        msg: payload.msg,
       };
     case types.PRODUCT_FETCH_FAILURE:
       return {
         ...state,
-        isError:false,
-        data:[] 
+        isError: false,
+        data: [],
+      };
+    case types.SORT_PRODUCT:
+      return {
+        ...state,
+        sort: payload,
       };
     case types.FILTER_PRODUCT:
       return {
         ...state,
-        filterData:payload
-      }
+        filter: payload,
+      };
+    case types.SET_LIMIT_PRODUCT:
+      return {
+        ...state,
+        limit: payload,
+      };
+    case types.SET_PAGE_PRODUCT:
+      return {
+        ...state,
+        page: payload,
+      };
     default:
-      return state
-      
+      return state;
   }
 };
