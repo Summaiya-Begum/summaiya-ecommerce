@@ -1,10 +1,18 @@
+import { Box } from '@chakra-ui/react'
 import React from 'react'
+import Footer from './Footer'
+import HomeMultiSlider from './HomePage/HomeMultiSlider'
+import HomeSlider from './HomePage/HomeSlider'
+import ProductOfHome from './HomePage/ProductOfHome'
 
 function Home() {
   return (
-    <div>
-      <img src="https://images.meesho.com/images/pow/downloadBannerDesktop.webp" alt="" />
-    </div>
+    <Box>
+      <HomeSlider />
+      <HomeMultiSlider/>
+      <ProductOfHome />
+      <Footer />
+    </Box>
   )
 }
 

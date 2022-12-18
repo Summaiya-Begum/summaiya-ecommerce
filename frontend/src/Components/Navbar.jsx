@@ -294,11 +294,11 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: 'Learn Design',
+    label: 'Electronics',
     href: '#',
   },
   {
-    label: 'Hire Designers',
+    label: 'Accessories',
     href: '#',
   },
 ];

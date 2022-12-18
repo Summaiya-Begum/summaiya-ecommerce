@@ -6,26 +6,25 @@ import ProductList from './ProductList';
 import { Box, SimpleGrid } from '@chakra-ui/react'
 import Functionality from './Functionality';
 import Pagination from './Pagination';
+import Footer from '../Footer';
 function Product() {
   const data = useSelector((state) => state.products.data)
-  const state = useSelector((state) => state.products)
+  const { filter, sort, limit, page } = useSelector((state) => state.products)
   console.log(data)
-  console.log(state)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchProduct(state));
-    console.log(state.page, "page")
-  }, [state.filter, state.sort,state.limit,state.page])
+    dispatch(fetchProduct({ filter, sort, limit, page }));
+  }, [filter, sort, limit, page])
 
-
+  // state.filter, state.sort,state.limit,state.page
   return (
     <>
       <Box>
         <Functionality />
       </Box>
       <Box>
-        <SimpleGrid columns={{ base: 1, sm: 1, md: 3, lg: 4 }} spacing='20px' p={'2rem'}>
+        <SimpleGrid columns={[1,2,3,4]} spacing='20px' p={'2rem'}>
           {data?.map((el, i) => {
             // console.log(el)
             return <ProductList product={el} key={i} />
@@ -36,6 +35,9 @@ function Product() {
       </Box>
       <Box>
         <Pagination />
+      </Box>
+      <Box>
+        <Footer />
       </Box>
     </>
 

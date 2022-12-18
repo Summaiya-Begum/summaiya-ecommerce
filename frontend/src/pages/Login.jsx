@@ -45,11 +45,11 @@ function Login() {
 
     return (
         <Flex
-            minH={'100vh'}
+            minH={'90vh'}
             align={'center'}
             justify={'center'}
             bg={useColorModeValue('gray.50', 'gray.800')}>
-            <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+            <Stack spacing={4} mx={'auto'} maxW={'lg'} py={5} px={5}>
                 <Stack align={'center'}>
                     <Heading fontSize={'lg'} color={'gray.600'}>
                         Login Your Account

@@ -69,14 +69,14 @@ function Signup() {
     // console.log(signupData)
     return (
         <Flex
-            minH={'100vh'}
+            minH={'90vh'}
             align={'center'}
             justify={'center'}
             bg={useColorModeValue('gray.50', 'gray.800')}>
-            <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+            <Stack spacing={8} mx={'auto'} maxW={'lg'} py={5} px={6}>
                 <Stack align={'center'}>
-                    <Heading fontSize={'lg'} color={'gray.600'}>
-                        Create Your Account Here✌️
+                    <Heading fontSize={'lg'} color={'black'}>
+                        Create Your Account Here
                     </Heading>
                 </Stack>
                 <Box
@@ -134,11 +134,11 @@ function Signup() {
                                     <Radio name="gender" onChange={handleChange} value='female' >Female</Radio>
                                 </HStack>
                             </RadioGroup>
-                            <Stack spacing={10} pt={2}>
+                            <Stack spacing={5} pt={0}>
                                 <Button
                                     loadingText="Submitting"
                                     size="lg"
-                                    bg={'blue.400'}
+                                    bg={'#11A5DC'}
                                     color={'white'}
                                     _hover={{
                                         bg: 'pink.500',
@@ -162,7 +162,7 @@ function Signup() {
                                     theme="colored"
                                 />
                             </Stack>
-                            <Stack pt={6}>
+                            <Stack pt={0}>
                                 <Text align={'center'}>
                                     Already a user? <Link color={'blue.400'}>Login</Link>
                                 </Text>

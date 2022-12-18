@@ -15,15 +15,15 @@ const getFailure = () => {
   return { type: types.PRODUCT_FETCH_FAILURE };
 };
 export const fetchProduct =
-  ({ filter, sort, page, limit }) =>
+  (payload) =>
   (dispatch) => {
     dispatch(getRequest());
     return (
       axios
         .get(
-          `http://localhost:8081/products?filter=${filter}&sort=${sort}&page=${page}&limit=${limit}`
+          `http://localhost:8081/products`,{ params:payload }
         )
-        .then((res)=>console.log(res.data))
+        // .then((res)=>console.log(res.data))
         .then((res) => dispatch(getProduct(res.data)))
         .catch((err) => dispatch(getFailure(err)))
     );
@@ -62,3 +62,7 @@ export const changePageProduct = (payload) => {
     payload,
   };
 };
+
+
+// { filter, sort, page, limit }
+// ?filter=${filter}&sort=${sort}&page=${page}&limit=${limit}

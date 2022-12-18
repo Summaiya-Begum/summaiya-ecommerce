@@ -30,7 +30,8 @@ export const productReducer = (state = initState, action) => {
     case types.PRODUCT_FETCH_FAILURE:
       return {
         ...state,
-        isError: false,
+        isLoading:false,
+        isError: true,
         data: [],
       };
     case types.SORT_PRODUCT:
