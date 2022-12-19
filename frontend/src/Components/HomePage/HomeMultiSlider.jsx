@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Image, Flex, Button, Heading,Box } from "@chakra-ui/react";
+import { Stack, Image, Flex, Button, Heading,Box,Text } from "@chakra-ui/react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -109,8 +109,8 @@ const HomeMultiSlider = () => {
                                     _hover={{ bg: "none" }}
                                     color="black"
                                     border="1px solid #cfcfcf"
-                                >{`MRP ₹ ${item.price}`}</Button>
-                                <Button bg="#FB641B" _hover={{ bg: "#92be4d" }} p="0 2">
+                                ><Text fontWeight={500}>MRP₹  <span style={{ color: '#388E3C' }}>  ${item.price}</span></Text></Button>
+                                <Button bg="#FB641B" _hover={{ bg: "#000" ,color:'#FB641B'}} p="0 2">
                                     Add To Cart
                                 </Button>
                             </Flex>

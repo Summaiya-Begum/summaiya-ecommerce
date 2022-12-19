@@ -24,52 +24,56 @@ function ProductList({ product }) {
               alt='Dan Abramov'
             />
           </Box>
-          <Box p='2'>
+          <Box p='2' textAlign={'start'}>
             <Box alignItems='baseline'>
               <Heading
                 as='h4' fontSize='12px'
                 color='black'
-                fontWeight='semibold'
                 letterSpacing='wide'
                 textTransform='uppercase'
                 lineHeight={2}
-              >
-                <span style={{ textTransform: 'uppercase' }}>Title: </span> {product.title}
+                fontWeight={'bold'}
+                fontFamily={'cursive'}
+              >Title:
+                <span style={{ textTransform: 'uppercase', color: '#388E3C' }}> {product.title}</span> 
               </Heading>
             </Box>
             <Box
               color='black.500'
-              fontWeight='semibold'
               letterSpacing='wide'
               fontSize='xs'
               lineHeight={2}
-            >
-              <span style={{ textTransform: 'uppercase' }}>Price: </span>  ₹{product.price}
+              fontWeight={'bold'} 
+              fontFamily={'cursive'}
+            >Price: 
+              <span style={{ textTransform: 'uppercase', color: '#388E3C'}}> ₹{product.price}</span>  
             </Box>
             <Box >
               <Text
                 color='black.500'
-                fontWeight='semibold'
                 letterSpacing='wide'
                 fontSize={12}
                 lineHeight={2}
-              >
-                <span style={{ textTransform: 'uppercase' }}>Category: </span>{product.category.name}
+                fontWeight={'bold'} 
+                fontFamily={'cursive'}
+              >Category:
+                <span style={{ textTransform: 'uppercase', color: '#388E3C'  }}> {product.category.name}</span>
               </Text>
             </Box>
             <Box
               onClick={handleMore}
               mt='1'
-              fontWeight='semibold'
+              fontWeight={'bold'}
+              fontFamily={'cursive'}
               fontSize={12}
-              // lineHeight='3'
+
               noOfLines={read ? 3 : 1}
             >
               <span style={{ textTransform: 'uppercase', cursor: 'pointer' }}>Discription: </span>  {product.description}
             </Box>
 
           </Box>
-          <Box  w={'100%'}>
+          <Box w={'100%'}>
             <SimpleGrid columns={[1, 2]} spacing='15px' p={'1rem'}>
               <Grid
               >

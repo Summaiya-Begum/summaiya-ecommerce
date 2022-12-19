@@ -1,4 +1,4 @@
-import { Button, Box, SimpleGrid, Grid } from '@chakra-ui/react'
+import { Button, Box, SimpleGrid, Grid, Stack } from '@chakra-ui/react'
 import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,6 +18,7 @@ function Pagination() {
 
                 <Button
                     bg='teal'
+                    color={'white'}
                     fontWeight={'bold'}
                     p={'0rem 1rem'}
                     _hover={{
@@ -35,9 +36,9 @@ function Pagination() {
     })
     return (
         <Box 
-        w={'100%'}
+        whiteSpace={5}
         boxShadow={'2xl'}
-        display={'flex'} justifyContent={'center'} gap={2} p={'2rem'}>{pagination}</Box>
+        p={'2rem'}>{pagination}</Box>
     )
 }
 
