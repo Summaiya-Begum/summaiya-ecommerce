@@ -1,6 +1,7 @@
-import { Box, Stack, Image, Button, Text, SimpleGrid, VStack } from '@chakra-ui/react'
+import { Box, Stack, Image, Button, Text, SimpleGrid, VStack, useColorModeValue, } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
+import ArrowUp from '../ArrowUp'
 
 const getData = async () => {
     try {
@@ -16,6 +17,11 @@ const getData = async () => {
     }
 
 }
+
+
+
+
+
 // getData()
 
 // https://fakestoreapi.com/products
@@ -49,46 +55,48 @@ function ProductOfHome() {
 
 
     return (
-        <Box height={'auto'} bg='white' >
-            <Stack direction={['row', 'column']} boxShadow={"rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"}>
-                <VStack>
-                    <SimpleGrid columns={[1, 2]} spacing='5px' p={'0.5rem'} alignItems={'center'}>
-                        <Button w={180}
-                            color='#FB641B'
-                            bg='black'
-                            fontWeight={'bold'}
-                            _hover={{
-                                bg: '#FB641B',
-                                color: "white"
-                            }}
-                            onClick={() => Filter("low")}>Low To High</Button>
+        <Box height={'auto'} bg='white' textAlign={'center'} >
+            <Stack direction={['row', 'column']} margin={'auto'} boxShadow={"rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"} p={2}>
+                <Box textAlign={'center'}display={'flex'} gap={5} margin={'auto'}>
+                    <Button
+                        color='#FB641B'
+                        bg='black'
+                        fontWeight={'bold'}
+                        _hover={{
+                            bg: '#FB641B',
+                            color: "white"
+                        }}
+                        onClick={() => Filter("low")}>Low To High</Button>
 
-                        <Button
-                            w={180}
-                            color='#FB641B'
-                            bg='black'
-                            fontWeight={'bold'}
-                            _hover={{
-                                bg: '#FB641B',
-                                color: "white"
-                            }}
-                            onClick={() => Filter("high")}>High To Low</Button>
-                    </SimpleGrid>
-                </VStack>
+                    <Button
+
+                        color='#FB641B'
+                        bg='black'
+                        fontWeight={'bold'}
+                        _hover={{
+                            bg: '#FB641B',
+                            color: "white"
+                        }}
+                        onClick={() => Filter("high")}>High To Low</Button>
+                </Box>
 
             </Stack>
 
+
+
+            {/* API PRODUCTS */}
             <SimpleGrid
                 columns={[1, 2, 3, 4]}
                 spacing='15px'
                 p={'1.5rem'}
                 borderRadius={'3xl'}
+                color={useColorModeValue('black', 'white')}
+                bg={useColorModeValue('white', 'gray.800')}
             >
                 {
                     productData.map((el) =>
                         <Stack
                             direction={['row', 'column']}
-                            // boxShadow="2px 1px 2px 1px #388E3C"
                             cursor={'pointer'}
                             borderRadius={'3xl'}
                             _hover={{ boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}
@@ -102,12 +110,19 @@ function ProductOfHome() {
                                 <Image boxSize='fit' width={'100%'}
                                     borderRadius={'3xl'} h={280} src={el.image} alt={el.title} />
 
-                                <Box > <Text fontWeight={'bold'} fontFamily={'cursive'}>Price:<span style={{ color: '#388E3C' }}> ₹{el.price}</span></Text></Box>
-                                <Box  > <Text fontWeight={'bold'} fontFamily={'cursive'}>Rating: <span style={{ color: '#ffff', background: '#', padding: '0.3rem 0.5rem', borderRadius: '15px' }}>{el.rating.rate} ★</span></Text></Box>
-                                <Box >  <Text fontWeight={'bold'} fontFamily={'cursive'}>Category: {el.category}</Text></Box>
+                                <Box >
+                                    <Text fontWeight={'bold'} fontFamily={'cursive'}>Price:<span style={{ color: '#388E3C' }}> ₹{el.price}</span></Text>
+                                </Box>
+                                <Box  >
+                                    <Text fontWeight={'bold'} fontFamily={'cursive'}>Rating: <span style={{ color: '#ffff', background: '#388E3C', padding: '0.3rem 0.5rem', borderRadius: '15px' }}>{el.rating.rate} ★</span></Text>
+                                </Box>
+                                <Box >
+                                    <Text fontWeight={'bold'} fontFamily={'cursive'}>Category: {el.category}</Text>
+                                </Box>
                                 {/* <Box h={70}><Text>Title: {el.title}</Text></Box> */}
                                 {/* <p>Description: {el.description}</p> */}
-                                <Box p={'0.5rem'} >
+
+                                <Box p={'0.8rem 0rem'} >
                                     <Button
                                         w={180}
                                         bg='#FB641B'
@@ -128,7 +143,7 @@ function ProductOfHome() {
 
             </SimpleGrid>
 
-
+            <ArrowUp />
         </Box>
     )
 }

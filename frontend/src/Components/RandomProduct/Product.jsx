@@ -7,6 +7,7 @@ import { Box, SimpleGrid } from '@chakra-ui/react'
 import Functionality from './Functionality';
 import Pagination from './Pagination';
 import Footer from '../Footer';
+import ArrowUp from '../ArrowUp';
 function Product() {
   const data = useSelector((state) => state.products.data)
   const { filter, sort, limit, page } = useSelector((state) => state.products)
@@ -36,6 +37,7 @@ function Product() {
       <Box>
         <Pagination />
       </Box>
+      <ArrowUp/>
       <Box>
         <Footer />
       </Box>

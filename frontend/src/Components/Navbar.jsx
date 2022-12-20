@@ -22,8 +22,10 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   SunIcon,
-  MoonIcon
+  MoonIcon,
+
 } from '@chakra-ui/icons';
+import {BsCart3} from "react-icons/bs"
 import { Link } from 'react-router-dom';
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -79,9 +81,29 @@ export default function Navbar() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
-            <Button onClick={toggleColorMode} bg={'black'}>
-                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            <Button bg={'black'} onClick={toggleColorMode} 
+             _hover={{
+              bg: 'pink.400',
+              color:"black"
+            }}
+            >
+                {colorMode === 'light' ? <MoonIcon/> : <SunIcon />}
               </Button>
+
+              <Link to='/cart'>
+            <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontWeight={'bold'}
+              color={'white'}
+              bg={'#E80070'}
+              _hover={{
+                bg: 'pink.400',
+                color:"white"
+              }}
+            >
+        <BsCart3 position={'relative'} style={{fontSize:"30px", color:"black", marginRight:'-9px'}} /><span  style={{marginTop:'-24px',}} >0</span>
+            </Button>
+          </Link>
           <Link to='/signup'>
             <Button
               display={{ base: 'none', md: 'inline-flex' }}
@@ -111,6 +133,7 @@ export default function Navbar() {
               Login
             </Button>
           </Link>
+
         </Stack>
       </Flex>
 

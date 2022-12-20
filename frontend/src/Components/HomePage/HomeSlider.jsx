@@ -37,7 +37,6 @@ function HomeSlider() {
     const [slides, setSlides] = useState(SlideData)
     return (
         <Carousel
-            border="2px solid red"
             responsive={responsive}
             className="carasousel"
             autoPlay={true}
@@ -51,13 +50,13 @@ function HomeSlider() {
                     color: "black",
                     borderRadius: 0,
                     height: "auto",
-
+                    border:'1px solid green'
                 }
             }}>
             {slides.map((slides, i) => {
                 return (
                     <>
-                        <Image src={slides.image} alt="banner" key={i} h={300} />
+                        <Image  border={'1px solid green'} src={slides.image} alt="banner" key={i} h={300} />
                     </>
                 )
             })}

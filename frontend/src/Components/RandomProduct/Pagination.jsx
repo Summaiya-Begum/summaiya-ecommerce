@@ -17,8 +17,8 @@ function Pagination() {
         return (
 
                 <Button
-                    bg='teal'
-                    color={'white'}
+                    bg='#FB641B'
+                    color={'black'}
                     fontWeight={'bold'}
                     p={'0rem 1rem'}
                     _hover={{

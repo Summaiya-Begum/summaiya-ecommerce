@@ -1,0 +1,17 @@
+.prod-card:hover{
+    background: linear-gradient(#252525, #252525 50%, #2ecc71 50%, #2ecc71);
+    background-size: 100% 200%;
+    /*trasition effect for background*/
+    transition: background 1s;
+}
+.container::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+.hov{
+    display: block;
+    
+  }
+  .nonhover{
+    display: none;
+    
+  }

@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const productRoutes = require("./routes/products.route");
 const cors = require("cors");
 const authentication = require("./middleware/authentication");
+const BookRoutes = require("./routes/bookstore.route");
 require("dotenv").config(); // read env file
 
 const app = express();
@@ -21,13 +22,13 @@ app.post("/signup", async (req, res) => {
   const { password, email } = req.body;
   try {
     let user = await userModel.findOne({ email });
-    console.log(user)
+    console.log(user);
     if (!user) {
       bcrypt.hash(password, 6, async function (err, hash) {
         const newuser = new userModel({ ...req.body, password: hash });
         await newuser.save();
       });
-      return res.send({ msg: "User Sign Up Successfull"});
+      return res.send({ msg: "User Sign Up Successfull" });
     } else {
       return res.send({ msg: "User Is Already Signed up" });
     }
@@ -50,7 +51,7 @@ app.post("/login", async (req, res) => {
       if (result) {
         const token = jwt.sign({ userId: hash._id }, process.env.SCERET_KEY);
         // res.send(token)
-        res.send({ msg: "Login Successful",  token});
+        res.send({ msg: "Login Successful", token });
       } else {
         res.send({ msg: "Login Failed", err });
       }
@@ -60,9 +61,11 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Product Route
+//  Routers 
+// app.use('/admin', adminRoutes)
 // app.use(authentication)
 app.use("/products", productRoutes);
+app.use("/bookstore", BookRoutes);
 
 // console.log(process.env.PORT)
 app.listen(process.env.PORT, async (req, res) => {

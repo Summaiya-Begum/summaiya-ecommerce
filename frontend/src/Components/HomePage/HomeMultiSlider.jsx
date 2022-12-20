@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Image, Flex, Button, Heading,Box,Text } from "@chakra-ui/react";
+import {  Image, Flex, Button, Heading, Box, Text,VStack } from "@chakra-ui/react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,11 +19,12 @@ const HomeMultiSlider = () => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow:4,
+        slidesToScroll:2,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 4000,
         arrows: true,
+
     };
     const trendingItems = [
         {
@@ -74,30 +75,33 @@ const HomeMultiSlider = () => {
     ];
     return (
         <>
-            <Box m={"20px 0px"}>
-                <Slider {...settings}>
+            <Box  margin={'auto'}>
+                <Slider
+                 {...settings} 
+               >
                     {trendingItems.map((item, i) => (
-                        <Stack
+                        <VStack
                             h="400px"
                             borderRight="1px solid rgb(238, 238, 238)"
                             _hover={{ boxShadow: "3px 4px 4px 1px #d3d3d3" }}
-                            p={5}
+                            w={250}
                             justify="center"
+                            p={2}
                         >
                             <Image
-                               boxSize='fit'
+                                boxSize='fit'
                                 p={2}
                                 src={item.image}
-                                w="100%"
+                                w={250}
                                 h={250}
                                 borderRadius="10px"
                                 border="0.2px solid rgb(238, 238, 238)"
                                 boxShadow="1px 2px #efe9e9"
+                                m={'auto'}
                             />
                             <Heading fontSize={15}>Title: {item.title}</Heading>
                             <Flex
                                 justifyContent={'center'}
-
                                 gap={2}
                                 textAlign={'center'}>
                                 <Button
@@ -109,12 +113,12 @@ const HomeMultiSlider = () => {
                                     _hover={{ bg: "none" }}
                                     color="black"
                                     border="1px solid #cfcfcf"
-                                ><Text fontWeight={500}>MRP₹  <span style={{ color: '#388E3C' }}>  ${item.price}</span></Text></Button>
-                                <Button bg="#FB641B" _hover={{ bg: "#000" ,color:'#FB641B'}} p="0 2">
+                                ><Text fontWeight={500}>MRP  <span style={{ color: '#388E3C' }}>  ${item.price}</span></Text></Button>
+                                <Button bg="#FB641B" _hover={{ bg: "#000", color: '#FB641B' }} p="0 2">
                                     Add To Cart
                                 </Button>
                             </Flex>
-                        </Stack>
+                        </VStack>
                     ))}
                 </Slider>
             </Box>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Stack, Image, Text, Heading, Button, Divider, VStack, SimpleGrid, Grid } from '@chakra-ui/react'
+import { Box, Stack, Image, Text, Heading, Button, Divider, VStack, SimpleGrid, Grid, useColorModeValue } from '@chakra-ui/react'
 import { GiHearts } from "react-icons/gi"
 import { HiShoppingBag } from "react-icons/hi"
 import { useState } from 'react'
@@ -24,19 +24,18 @@ function ProductList({ product }) {
               alt='Dan Abramov'
             />
           </Box>
-          <Box p='2' textAlign={'start'}>
-            <Box alignItems='baseline'>
-              <Heading
-                as='h4' fontSize='12px'
-                color='black'
-                letterSpacing='wide'
-                textTransform='uppercase'
-                lineHeight={2}
-                fontWeight={'bold'}
-                fontFamily={'cursive'}
-              >Title:
+          <Box p='2' textAlign={'start'}   
+          color={useColorModeValue('black', 'white')}
+          bg={useColorModeValue('white', 'gray.800')}
+          >
+            <Box  color='black.500'
+              letterSpacing='wide'
+              fontSize='xs'
+              lineHeight={2}
+              fontWeight={'bold'} 
+              fontFamily={'cursive'}>
+            Title:
                 <span style={{ textTransform: 'uppercase', color: '#388E3C' }}> {product.title}</span> 
-              </Heading>
             </Box>
             <Box
               color='black.500'

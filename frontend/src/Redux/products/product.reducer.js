@@ -4,7 +4,7 @@ const initState = {
   isLoading: false,
   isError: false,
   page: 1,
-  limit: 12,
+  limit: 20,
   sort: null,
   filter: null,
   msg: null,
