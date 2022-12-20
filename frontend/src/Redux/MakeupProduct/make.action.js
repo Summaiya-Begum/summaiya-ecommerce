@@ -10,11 +10,11 @@ export const makeupFailure = (payload) => {
   return { type: types.PRODUCT_FETCH_FAILURE, payload };
 };
 
-export const getData = () => (dispatch) => {
+export const getData = (payload) => (dispatch) => {
 
   dispatch(makeupRequest());
   axios
-    .get(`https://mock-api-oc4h.onrender.com/products`)
+    .get(`https://mock-api-oc4h.onrender.com/products`,{params:payload})
     // .then((res)=>console.log(res.data))
     .then((res) => dispatch(makeupSuccess(res.data)))
     .catch((err) => dispatch(makeupFailure(err)));
