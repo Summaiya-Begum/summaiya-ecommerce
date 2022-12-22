@@ -3,13 +3,15 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../Redux/products/product.action';
 import ProductList from './ProductList';
-import { Box, SimpleGrid } from '@chakra-ui/react'
+import { Box, Heading, SimpleGrid, Image } from '@chakra-ui/react'
 import Functionality from './Functionality';
 import Pagination from './Pagination';
 import Footer from '../Footer';
 import ArrowUp from '../ArrowUp';
+import loading from '../../assest/loading.gif'
 function Product() {
   const data = useSelector((state) => state.products.data)
+  const { isLoading } = useSelector((state) => state.products)
   const { filter, sort, limit, page } = useSelector((state) => state.products)
   console.log(data)
   const dispatch = useDispatch()
@@ -21,23 +23,26 @@ function Product() {
   // state.filter, state.sort,state.limit,state.page
   return (
     <>
-      <Box>
-        <Functionality />
-      </Box>
-      <Box>
-        <SimpleGrid columns={[1,2,3,4]} spacing='20px' p={'2rem'}>
-          {data?.map((el, i) => {
-            // console.log(el)
-            return <ProductList product={el} key={i} />
-          })
-          }
-        </SimpleGrid>
 
+      <Box>
+        {isLoading ? <Image width={500} h={60} m={'auto'} src={loading} /> :
+          <Box>
+            <Functionality />
+
+            <SimpleGrid columns={[1, 2, 3, 4]} spacing='20px' p={'2rem'}>
+              {data?.map((el, i) => {
+                // console.log(el)
+                return <ProductList product={el} key={i} />
+              })
+              }
+            </SimpleGrid>
+          </Box>
+        }
       </Box>
       <Box>
         <Pagination />
       </Box>
-      <ArrowUp/>
+      <ArrowUp />
       <Box>
         <Footer />
       </Box>

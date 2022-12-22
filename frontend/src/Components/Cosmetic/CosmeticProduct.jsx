@@ -1,14 +1,16 @@
 
 import React, { useEffect } from 'react'
-import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem,Image } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux"
 import { getData } from '../../Redux/MakeupProduct/make.action';
 import { CosmeticList } from './CosmeticList';
 import { useSearchParams } from 'react-router-dom';
 import CosmeticPagination from './CosmeticPagination';
+import loading from '../../assest/loading.gif'
 function CosmeticProduct() {
   // https://mock-api-oc4h.onrender.com/products
   const products = useSelector((state) => state.makeup.data)
+  const { isLoading } = useSelector((state) => state.makeup)
   const searchParams = useSearchParams()
   // const { isLoading } = useSelector((state) => state.makeup)
 console.log(searchParams)
@@ -44,10 +46,8 @@ console.log(searchParams)
       <Flex h="100vh"
         //  border="1px green solid"
         w='100%' >
-
-        <Box>
-        </Box>
-        <Box h="100%" overflow="scroll" overflowX={"hidden"} >
+       { isLoading ? <Image width={500} h={60} m={'auto'} src={loading} /> :
+       <Box h="100%" overflow="scroll" overflowX={"hidden"} >
           <Grid templateColumns="repeat(4, 1fr)" gap={1}>
             {
               products?.map((item) => {
@@ -56,6 +56,7 @@ console.log(searchParams)
             }
           </Grid>
         </Box>
+        }
         <CosmeticPagination  />
       </Flex>
     </>
