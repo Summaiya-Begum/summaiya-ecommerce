@@ -24,3 +24,11 @@ export const getLogin = (payload) => (dispatch) => {
       })
       .catch((err) => dispatch({ type: types.LOGIN_FAILURE, payload: err }));
   };
+
+
+// export const userLogout=(payload)=>{
+// return(
+  
+// )
+
+// }

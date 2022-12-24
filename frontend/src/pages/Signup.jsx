@@ -13,10 +13,10 @@ import {
     Heading,
     Text,
     useColorModeValue,
-    Link,
     Radio,
     RadioGroup,
 } from '@chakra-ui/react';
+import { Link } from "react-router-dom"
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from "react-redux"
@@ -50,12 +50,12 @@ function Signup() {
     });
 
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(signupData)
-       await dispatch(getSignup(signupData))
+        await dispatch(getSignup(signupData))
         if (msg) {
-          await notify()
+            await notify()
         }
     }
 
@@ -164,7 +164,7 @@ function Signup() {
                             </Stack>
                             <Stack pt={0}>
                                 <Text align={'center'}>
-                                    Already a user? <Link color={'blue.400'}>Login</Link>
+                                    Already a user? <Link color={'blue.400'} to={'/login'}>Login</Link>
                                 </Text>
                             </Stack>
                         </Stack>

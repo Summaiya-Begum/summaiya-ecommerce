@@ -37,12 +37,15 @@ function NoteAdd() {
   }
   return (
     <Flex
-      minH={'90vh'}
+      minH={'40vh'}
       align={'center'}
       justify={'center'}
+      maxW={'xl'}
+      m={'auto'}
+      border={'1px solid red'}
       bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={4} mx={'auto'} maxW={'lg'} py={5} px={5} border={'1px solid green'}>
-        <Stack align={'center'}>
+      <Stack  spacing={4} border={'1px solid red'} mx={'auto'} maxW={'xl'} py={5} px={5} >
+        <Stack align={'center'} border={'1px solid red'}>
           <Heading fontSize={'lg'} color={'black'}>
             Post Book In DataBase
           </Heading>
@@ -51,7 +54,10 @@ function NoteAdd() {
          rounded={'lg'}
          bg={useColorModeValue('white', 'gray.700')}
          boxShadow={'lg'}
-         p={8}>
+         p={8}
+         border={'1px solid red'}
+         w={[200, 400, 500]}
+         >
           <form onSubmit={handleSubmit}>
             <Stack spacing={4}>
 

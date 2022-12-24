@@ -13,7 +13,7 @@ function CosmeticProduct() {
   const { isLoading } = useSelector((state) => state.makeup)
   const searchParams = useSearchParams()
   // const { isLoading } = useSelector((state) => state.makeup)
-console.log(searchParams)
+// console.log(searchParams)
 
 
   const dispatch = useDispatch()
@@ -32,7 +32,7 @@ console.log(searchParams)
           _order: sortBy,
         },
       };
-      console.log(getProductParams);
+      // console.log(getProductParams);
       dispatch(getData(getProductParams));
     }
   }, []);

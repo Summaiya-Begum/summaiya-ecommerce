@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../Redux/products/product.action';
 import ProductList from './ProductList';
-import { Box, Heading, SimpleGrid, Image } from '@chakra-ui/react'
+import { Box, Heading, SimpleGrid, Image, Input } from '@chakra-ui/react'
 import Functionality from './Functionality';
 import Pagination from './Pagination';
 import Footer from '../Footer';
@@ -21,9 +21,12 @@ function Product() {
   }, [filter, sort, limit, page])
 
   // state.filter, state.sort,state.limit,state.page
+
+
+
   return (
     <>
-
+  
       <Box>
         {isLoading ? <Image width={500} h={60} m={'auto'} src={loading} /> :
           <Box>

@@ -3,14 +3,22 @@ import { Box, Stack, Image, Text, Heading, Button, Divider, VStack, SimpleGrid, 
 import { GiHearts } from "react-icons/gi"
 import { HiShoppingBag } from "react-icons/hi"
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { postProduct } from '../../Redux/products/product.action'
+import { useNavigate } from 'react-router-dom'
 function ProductList({ product }) {
   const [read, setRead] = useState(false)
-
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const handleMore = () => {
     setRead(prev => !prev)
   }
 
 
+  const handleCart = (id) =>{
+    dispatch(postProduct(id))
+      navigate('/cart')
+  }
 
   return (
     <Box height={'auto'} boxShadow='2xl' p='2' rounded='md' bg='white'>
@@ -96,6 +104,7 @@ function ProductList({ product }) {
                   _hover={{
                     bg: "black"
                   }}
+                  onClick={()=>handleCart(product.id)}
                 >
                   <HiShoppingBag size={30} color='white' />
                 </Button>

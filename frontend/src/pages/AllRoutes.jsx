@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import NoteAdd from '../Components/adminfolder/NoteAdd'
 import Cart from '../Components/Cart/Cart'
 import CosmeticProduct from '../Components/Cosmetic/CosmeticProduct'
 import Home from '../Components/Home'
@@ -21,6 +22,8 @@ function AllRoutes() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/beautyproduct' element={<CosmeticProduct />} />
                 <Route path='/cart' element={<Cart />} />
+                <Route path='/admin' element={<NoteAdd />} />
+
             </Routes>
         </Box>
     )

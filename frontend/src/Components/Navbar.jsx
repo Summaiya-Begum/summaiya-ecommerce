@@ -25,9 +25,16 @@ import {
   MoonIcon,
 
 } from '@chakra-ui/icons';
-import {BsCart3} from "react-icons/bs"
+
 import { Link } from 'react-router-dom';
+import DrawerCart from './Cart/DrawerCart';
+import { useSelector } from 'react-redux';
+import Logout from '../pages/Logout';
 export default function Navbar() {
+
+
+  const isAuth = useSelector((state) => state.user.isAuth)
+  console.log(isAuth)
   const { isOpen, onToggle } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   return (
@@ -43,7 +50,7 @@ export default function Navbar() {
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}
 
-       
+
       >
         <Flex
           flex={{ base: 1, md: 'auto' }}
@@ -65,11 +72,11 @@ export default function Navbar() {
               fontFamily={'heading'}
               fontSize={20}
               fontWeight={'bold'}
-              color={useColorModeValue('white', 'white')}p={'0.5rem'}>
+              color={useColorModeValue('white', 'white')} p={'0.5rem'}>
               Summaiya
             </Text>
           </Link>
-          <Flex display={{ base: 'none', md: 'flex'}}p={'0.5rem'} m={'auto'} fontWeight={'500'}
+          <Flex display={{ base: 'none', md: 'flex' }} p={'0.5rem'} m={'auto'} fontWeight={'500'}
           // border="1px solid red"
           >
             <DesktopNav />
@@ -81,30 +88,20 @@ export default function Navbar() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
-            <Button bg={'black'} onClick={toggleColorMode} 
-             _hover={{
+          {/* Dark / Light Mode Button  */}
+          <Button bg={'black'} onClick={toggleColorMode}
+            _hover={{
               bg: 'pink.400',
-              color:"black"
+              color: "black"
             }}
-            >
-                {colorMode === 'light' ? <MoonIcon/> : <SunIcon />}
-              </Button>
+          >
+            {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+          </Button>
+          {/* Cart Drawer */}
+          <DrawerCart />
 
-              <Link to='/cart'>
-            <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontWeight={'bold'}
-              color={'white'}
-              bg={'#E80070'}
-              _hover={{
-                bg: 'pink.400',
-                color:"white"
-              }}
-            >
-        <BsCart3 position={'relative'} style={{fontSize:"30px", color:"black", marginRight:'-9px'}} /><span  style={{marginTop:'-24px',}} >0</span>
-            </Button>
-          </Link>
-          <Link to='/signup'>
+          {
+            isAuth ? <Logout />  : <Link to='/signup'>
             <Button
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={15}
@@ -113,13 +110,16 @@ export default function Navbar() {
               bg={'#E80070'}
               _hover={{
                 bg: 'pink.400',
-                color:"black"
+                color: "black"
               }}
             >
-              Sign Up
+              SignUp / LogIn
             </Button>
           </Link>
-          <Link to='/login'>
+              
+          }
+
+          {/* <Link to='/login'>
             <Button
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={15}
@@ -128,11 +128,11 @@ export default function Navbar() {
               bg={'#E80070'}
               _hover={{
                 bg: 'pink.400',
-                color:"black"
+                color: "black"
               }}>
               Login
             </Button>
-          </Link>
+          </Link> */}
 
         </Stack>
       </Flex>
@@ -161,7 +161,7 @@ const DesktopNav = () => {
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
-                
+
                 _hover={{
                   textDecoration: 'none',
                   color: linkHoverColor,
@@ -323,8 +323,8 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: 'Electronics',
-    href: '#',
+    label: 'Admin Page',
+    href: '/admin',
   },
   {
     label: 'Accessories',

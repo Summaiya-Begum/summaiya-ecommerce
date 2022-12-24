@@ -1,4 +1,4 @@
-import { Box, Stack, Image, Button, Text, SimpleGrid, VStack, useColorModeValue, } from '@chakra-ui/react'
+ import { Box, Stack, Image, Button, Text, SimpleGrid, VStack, useColorModeValue,Input } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import ArrowUp from '../ArrowUp'
@@ -17,7 +17,33 @@ const getData = async () => {
     }
 
 }
+// Debouncing process....
+const handleSearch = async (e) => {
+    const val = e.target.value
+    console.log(val)
+    try {
+        let url = `https://fakestoreapi.com/products/?q=${val}`
+        let res = await fetch(url)
+        console.log(res)
+        let data = await res.json()
+        console.log(data)
+        // return data
+    }
+    catch (err) {
+        console.log(err)
+    }
 
+}
+
+let timer;
+const Debouncing = function (fun, delay) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+        fun()
+    }, delay)
+}
+// const deboun = Debouncing(handleSearch, 3000)
+// console.log(deboun)
 
 
 
@@ -56,8 +82,10 @@ function ProductOfHome() {
 
     return (
         <Box height={'auto'} bg='white' textAlign={'center'} >
+            <Box ><Input onChange={()=>Debouncing(handleSearch, 3000)}  /></Box>
+
             <Stack direction={['row', 'column']} margin={'auto'} boxShadow={"rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"} p={2}>
-                <Box textAlign={'center'}display={'flex'} gap={5} margin={'auto'}>
+                <Box textAlign={'center'} display={'flex'} gap={5} margin={'auto'}>
                     <Button
                         color='#FB641B'
                         bg='black'

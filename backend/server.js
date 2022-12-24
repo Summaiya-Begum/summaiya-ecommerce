@@ -34,7 +34,7 @@ app.post("/signup", async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.status(404).send({ msg: "Signup Failed" });
+    res.status(404).send({ msg: "User Is Already Signed up" });
   }
   // console.log(user)
 });

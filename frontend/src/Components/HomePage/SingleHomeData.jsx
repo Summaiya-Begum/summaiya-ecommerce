@@ -22,7 +22,7 @@ const {AddtoCart}=useContext(Cartdata)
   // console.log(rating)
 
   return (
-    <div>
+    <div >
       {/* <h1>{params.id}</h1> */}
       <img src={data.image} alt={data.title} />
       <h3>Price: {data.price}</h3>
