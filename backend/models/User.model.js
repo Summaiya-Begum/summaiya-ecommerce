@@ -8,7 +8,12 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     phonenumber: { type: Number, required: true },
     gender: { type: String, required: true },
-    cartitems: [{ type: String, required: true }],
+    cartitems: [
+      {
+        product_id: { type: String, required: true },
+        item_quantity: { type: Number, required: true },
+      },
+    ],
     wishlist: [{ type: String, required: true }],
   },
   {

@@ -7,6 +7,7 @@ const productRoutes = require("./routes/products.route");
 const cors = require("cors");
 const authentication = require("./middleware/authentication");
 const BookRoutes = require("./routes/bookstore.route");
+const cartRoutes = require("./routes/cartproduct.route");
 require("dotenv").config(); // read env file
 
 const app = express();
@@ -49,7 +50,7 @@ app.post("/login", async (req, res) => {
     bcrypt.compare(password, hash.password, function (err, result) {
       // res.send(result)
       if (result) {
-        const token = jwt.sign({ userId: hash._id }, process.env.SCERET_KEY);
+        const token = jwt.sign({ userId: hash._id }, process.env.SECRET_KEY);
         // res.send(token)
         res.send({ msg: "Login Successful", token });
       } else {
@@ -63,8 +64,8 @@ app.post("/login", async (req, res) => {
 
 //  Routers 
 // app.use('/admin', adminRoutes)
-// app.use(authentication)
 app.use("/products", productRoutes);
+app.use("/cart", authentication,cartRoutes)
 app.use("/bookstore", BookRoutes);
 
 // console.log(process.env.PORT)
