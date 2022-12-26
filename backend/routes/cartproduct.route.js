@@ -27,7 +27,8 @@ cartRoutes.patch("/edit/:id", async (req, res) => {
       { $set: { cartitems: increaseQuantity } }
     );
   } else {
-    const new_obj = cart.push({ product_id: productId, item_quantity: 1 });
+    // const new_obj = cart.push({ product_id: productId, item_quantity: 1 });
+    const new_obj=[...cart,{ product_id: productId, item_quantity: 1 }]
     await userModel.updateOne({ _id: userId }, { $set: { cartitems: new_obj } });
   }
 

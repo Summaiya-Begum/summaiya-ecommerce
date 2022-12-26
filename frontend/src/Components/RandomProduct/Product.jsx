@@ -32,7 +32,10 @@ function Product() {
           <Box>
             <Functionality />
 
-            <SimpleGrid columns={[1, 2, 3, 4]} spacing='20px' p={'2rem'}>
+            <SimpleGrid 
+            
+            
+             spacing='20px' p={'2rem'}>
               {data?.map((el, i) => {
                 // console.log(el)
                 return <ProductList product={el} key={i} />
