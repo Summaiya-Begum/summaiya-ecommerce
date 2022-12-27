@@ -36,7 +36,7 @@ function Login() {
         // console.log(loginData)
         dispatch(getLogin(loginData))
         if(isAuth){
-           navigate('/product') 
+           navigate('/') 
         }
     }
 

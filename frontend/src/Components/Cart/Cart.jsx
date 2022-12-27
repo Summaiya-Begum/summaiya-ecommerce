@@ -21,6 +21,10 @@ import { CloseIcon } from '@chakra-ui/icons'
 import OrderSummary from './OrderSummary';
 import { FiGift } from 'react-icons/fi'
 import { Link } from "react-router-dom"
+import ArrowUp from '../ArrowUp';
+import { useDispatch,useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getCartItems } from '../../Redux/cart/cart.action';
 const PackageTier = ({ }) => {
 
 
@@ -76,7 +80,15 @@ const PackageTier = ({ }) => {
     </>
   );
 };
+
 const Cart = () => {
+  const dispatch = useDispatch()
+  const { cartItems, quantity } = useSelector(state => state.cart)
+  console.log(cartItems)
+  useEffect(() => {
+    dispatch(getCartItems())
+  }, [])
+
   return (
     <>
       <Flex
@@ -101,6 +113,7 @@ const Cart = () => {
         gap={15}
         m={'auto'}
       >
+
         <SimpleGrid
           direction={['row', 'column']}
           cursor={'pointer'} >
@@ -123,7 +136,10 @@ const Cart = () => {
               </Stack>
             </VStack>
             {/* Passing data props */}
-            <PackageTier />
+            {
+              
+              <PackageTier cartItems={cartItems} quantity={quantity} />
+            }
           </Stack>
           <Divider />
         </SimpleGrid>
@@ -136,7 +152,7 @@ const Cart = () => {
           </HStack>
         </Flex>
       </Flex>
-
+      <ArrowUp />
     </>
   );
 };

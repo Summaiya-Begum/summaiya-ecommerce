@@ -26,14 +26,14 @@ function Product() {
 
   return (
     <>
-  
+
       <Box>
         {isLoading ? <Image width={500} h={60} m={'auto'} src={loading} /> :
           <Box>
             <Functionality />
 
-            <SimpleGrid   columns={[1, 2, 3, 4]} borderRadius={'3xl'}
-             spacing='20px' p={'2rem'}>
+            <SimpleGrid columns={[1, 2, 3, 4]} borderRadius={'3xl'}
+              spacing='20px' p={'2rem'}>
               {data?.map((el, i) => {
                 // console.log(el)
                 return <ProductList product={el} key={i} />
@@ -47,9 +47,6 @@ function Product() {
         <Pagination />
       </Box>
       <ArrowUp />
-      <Box>
-        <Footer />
-      </Box>
     </>
 
 

@@ -1,13 +1,14 @@
 import * as types from "./auth.actionType";
-
+let token = JSON.parse(localStorage.getItem("token"));
 const initState = {
   isAuth: false,
   isLoading: false,
   isError: false,
   user: {},
-  token: "",
+  token: token || "",
   msg: "",
 };
+
 export const userReducer = (state = initState, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -17,6 +18,7 @@ export const userReducer = (state = initState, action) => {
         isLoading: true,
         isError: false,
       };
+
     case types.SIGNUP_SUCCESS:
       return {
         ...state,
@@ -36,11 +38,11 @@ export const userReducer = (state = initState, action) => {
         isLoading: true,
       };
     case types.LOGIN_SUCCESS:
+      localStorage.setItem("token", JSON.stringify(payload.token));
       return {
         ...state,
         isLoading: false,
         isAuth: true,
-        token: payload.token,
         user: payload.data,
         msg: payload.msg,
       };

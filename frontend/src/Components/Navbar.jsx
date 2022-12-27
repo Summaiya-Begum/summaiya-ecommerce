@@ -73,7 +73,7 @@ export default function Navbar() {
               fontSize={20}
               fontWeight={'bold'}
               color={useColorModeValue('white', 'white')} p={'0.5rem'}>
-              Summaiya
+              WalKart Ecommerce
             </Text>
           </Link>
           <Flex display={{ base: 'none', md: 'flex' }} p={'0.5rem'} m={'auto'} fontWeight={'500'}
