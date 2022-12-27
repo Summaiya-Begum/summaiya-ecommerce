@@ -54,7 +54,7 @@ const Debouncing = function (fun, delay) {
 function ProductOfHome() {
     const [productData, setProductData] = useState([])
 
-    function Filter(price) {
+    function Sort(price) {
         if (price === "low") {
             const updated = productData.sort((a, b) => {
                 if (a.price < b.price) {
@@ -76,7 +76,7 @@ function ProductOfHome() {
 
     useEffect(() => {
         getData()
-            .then((res) => setProductData(res))
+        .then((res) => setProductData(res))
     }, [])
 
 
@@ -94,7 +94,7 @@ function ProductOfHome() {
                             bg: '#FB641B',
                             color: "white"
                         }}
-                        onClick={() => Filter("low")}>Low To High</Button>
+                        onClick={() => Sort("low")}>Low To High</Button>
 
                     <Button
 
@@ -105,7 +105,7 @@ function ProductOfHome() {
                             bg: '#FB641B',
                             color: "white"
                         }}
-                        onClick={() => Filter("high")}>High To Low</Button>
+                        onClick={() => Sort("high")}>High To Low</Button>
                 </Box>
 
             </Stack>
