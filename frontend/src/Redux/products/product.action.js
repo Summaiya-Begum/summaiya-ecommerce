@@ -69,9 +69,3 @@ export const changePageProduct = (payload) => {
 
 
 
-//  Product Post request
-export const postProduct =(payload)=>(dispatch)=>{
-  axios.post(`http://localhost:8081/products/create/${payload}`)
-  .then((res)=>console.log(res))
-  .catch((err)=>console.log(err))
-}

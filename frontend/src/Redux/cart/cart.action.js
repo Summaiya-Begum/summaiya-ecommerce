@@ -14,3 +14,17 @@ export const getCartItems=()=>(dispatch)=>{
     })
 }
 
+
+//  Product PATCH Cart Request
+// export const postProduct =(payload)=>(dispatch)=>{
+//     return fetch(`http://localhost:8081/cart/edit/${payload}`,{
+//         method:"PATCH",
+//         headers:{"Content-Type":"application/json","authorization":`Bearer ${token}`}
+//     })
+//     .then(res=>res.json())
+//     .then(res=>{
+//         console.log(res);
+//        dispatch(getCartItems())
+//     })
+//   }
+
