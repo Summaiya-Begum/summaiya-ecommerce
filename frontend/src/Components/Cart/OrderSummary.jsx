@@ -10,7 +10,18 @@ import {
     Button,
 } from '@chakra-ui/react';
 import { FaArrowRight } from 'react-icons/fa'
+import { useSelector } from 'react-redux';
 export default function OrderSummary() {
+    const { cartItems, quantity } = useSelector(state => state.cart)
+
+    const subtotal =  cartItems.reduce((acc,el,i)=>{
+        return acc+= el.price*quantity[i]
+    },0)
+// console.log(subtotal)
+
+const discount = (subtotal-(subtotal*62)/100)
+// console.log(discount)
+
     return (
         <Box p={'0.5rem'} >
             <VStack spacing={1} textAlign="center">
@@ -57,7 +68,7 @@ export default function OrderSummary() {
                                 Subtotal
                             </Text>
                             <Text fontSize="1xl" fontWeight="500">
-                                $ 149
+                            ₹ {subtotal}
                             </Text>
 
                         </HStack>
@@ -65,10 +76,10 @@ export default function OrderSummary() {
                             py={5}
                         >
                             <Text fontSize="1xl" color="#E80070">
-                                Coupon Code
+                              Discount Coupon Code 
                             </Text>
                             <Text fontSize="1xl" fontWeight="500">
-                                $ 149
+                               62% off
                             </Text>
                         </HStack>
                         <HStack justifyContent="space-between" py={5}>
@@ -77,7 +88,7 @@ export default function OrderSummary() {
                             </Text>
 
                             <Text fontSize="1xl" fontWeight="500">
-                                $ 149
+                            ₹ {discount}
                             </Text>
 
                         </HStack>

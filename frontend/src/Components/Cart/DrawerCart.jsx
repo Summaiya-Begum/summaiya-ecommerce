@@ -11,7 +11,9 @@ import {
     Button
 } from '@chakra-ui/react'
 import { BsCart3 } from "react-icons/bs"
+import { useSelector } from 'react-redux'
 function DrawerCart() {
+    const { cartItems, quantity } = useSelector(state => state.cart)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
     return (
@@ -25,7 +27,7 @@ function DrawerCart() {
                     bg: 'pink.400',
                     color: "white"
                 }}>
-                <BsCart3 position={'relative'} style={{ fontSize: "30px", color: "black", marginRight: '-9px' }} /><span style={{ marginTop: '-24px', }} >0</span>
+                <BsCart3 position={'relative'} style={{ fontSize: "30px", color: "black", marginRight: '-9px' }} /><span style={{ marginTop: '-24px', }} >{quantity.length}</span>
             </Button>
             <Drawer onClose={onClose} isOpen={isOpen} size={'md'}>
                 <DrawerOverlay />

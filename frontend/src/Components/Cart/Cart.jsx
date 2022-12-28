@@ -22,10 +22,12 @@ import OrderSummary from './OrderSummary';
 import { FiGift } from 'react-icons/fi'
 import { Link } from "react-router-dom"
 import ArrowUp from '../ArrowUp';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getCartItems } from '../../Redux/cart/cart.action';
-const PackageTier = ({ }) => {
+
+
+const PackageTier = ({ item ,quantity}) => {
 
 
   return (
@@ -36,7 +38,7 @@ const PackageTier = ({ }) => {
           width="150px"
           height="150px"
           fit="cover"
-          src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYRUbq3qBYUhxNDVtJgR3E3lpB-eNGCdA2FR9cqDuFcA&s'}
+          src={item.category.image}
           alt={'cart'}
           draggable="false"
           loading="lazy"
@@ -44,10 +46,10 @@ const PackageTier = ({ }) => {
         />
         <Box pt="4">
           <Stack spacing="0.5">
-            <Text fontWeight="medium">Title: rtththf</Text>
-            <Text fontWeight="medium">Brand: rtththfx</Text>
+            <Text fontWeight="medium">Title: {item.title}</Text>
+            <Text fontWeight="medium">Category: {item.category.name}</Text>
             <Text color={('gray.600', 'gray.400')} fontSize="sm">
-              Description: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione nisi omnis odio accusantium beatae, nostrum, ab sint a alias rerum obcaecati.
+              Description: {item.description}
             </Text>
           </Stack>
 
@@ -61,12 +63,12 @@ const PackageTier = ({ }) => {
         <Box display='flex' alignItems='center' justifyContent={'center'} gap={2}>
           <Button>+</Button>
           <Box as='span'>
-            5
+            {quantity}
           </Box>
           <Button>-</Button>
         </Box>
         <Stack justifyContent={'center'} textAlign={'center'}>
-          <Heading size={'1xl'}>$50.00</Heading>
+          <Heading size={'1xl'}>₹{item.price*quantity}</Heading>
         </Stack>
         <Stack justifyContent={'center'}>
           <Button
@@ -84,7 +86,9 @@ const PackageTier = ({ }) => {
 const Cart = () => {
   const dispatch = useDispatch()
   const { cartItems, quantity } = useSelector(state => state.cart)
-  console.log(cartItems)
+
+
+
   useEffect(() => {
     dispatch(getCartItems())
   }, [])
@@ -131,14 +135,16 @@ const Cart = () => {
             >
               <Stack>
                 <Heading size={'lg'}>
-                  Cart  Items:  <span style={{ color: "#E80070" }}>5</span>
+                  Cart  Items:  <span style={{ color: "#E80070" }}>{quantity.length}</span>
                 </Heading>
               </Stack>
             </VStack>
             {/* Passing data props */}
             {
-              
-              <PackageTier cartItems={cartItems} quantity={quantity} />
+              cartItems.map((el, i) => {
+                // console.log(el)
+                return <PackageTier item={el} quantity={quantity[i]} />
+              })
             }
           </Stack>
           <Divider />
