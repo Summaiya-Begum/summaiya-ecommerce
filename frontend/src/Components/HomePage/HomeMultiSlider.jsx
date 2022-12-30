@@ -75,12 +75,13 @@ const HomeMultiSlider = () => {
     ];
     return (
         <>
-            <Box  margin={'auto'}>
+            <Box  margin={'auto'}         border={'2px solid red'}>
                 <Slider
                  {...settings} 
                >
                     {trendingItems.map((item, i) => (
                         <VStack
+                        border={'2px solid red'}
                             h="400px"
                             borderRight="1px solid rgb(238, 238, 238)"
                             _hover={{ boxShadow: "3px 4px 4px 1px #d3d3d3" }}

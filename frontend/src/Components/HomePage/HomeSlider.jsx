@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { Image } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import banner1 from "../../assest/banner1.jpg"
@@ -36,32 +36,36 @@ const SlideData = [
 function HomeSlider() {
     const [slides, setSlides] = useState(SlideData)
     return (
-        <Carousel
-            responsive={responsive}
-            className="carasousel"
-            autoPlay={true}
-            animation="slide"
-            indicators={false}
-            navButtonsAlwaysVisible={true}
-            cycleNavigation={true}
-            navButtonsProps={{
-                style: {
-                    background: "black",
-                    color: "black",
-                    borderRadius: 0,
-                    height: "auto",
-                    border:'1px solid green'
-                }
-            }}>
-            {slides.map((slides, i) => {
-                return (
-                    <>
-                        <Image  border={'1px solid green'} src={slides.image} alt="banner" key={i} h={300} />
-                    </>
-                )
-            })}
-        </Carousel>
+        <Box border={'1px solid red'}>
 
+
+            <Carousel
+
+                responsive={responsive}
+                className="carasousel"
+                autoPlay={true}
+                animation="slide"
+                indicators={false}
+                navButtonsAlwaysVisible={true}
+                cycleNavigation={true}
+                navButtonsProps={{
+                    style: {
+                        background: "black",
+                        color: "black",
+                        borderRadius: 0,
+                        height: "auto",
+                        border: '1px solid green'
+                    }
+                }}>
+                {slides.map((slides, i) => {
+                    return (
+                        <>
+                            <Image border={'1px solid green'} src={slides.image} alt="banner" key={i} h={300} />
+                        </>
+                    )
+                })}
+            </Carousel>
+        </Box>
     )
 }
 

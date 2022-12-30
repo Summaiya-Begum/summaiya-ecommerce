@@ -1,4 +1,4 @@
-
+import React from "react"
 import {
   Box,
   Flex,
@@ -27,16 +27,22 @@ import {
 } from '@chakra-ui/icons';
 
 import { Link } from 'react-router-dom';
-import DrawerCart from './Cart/DrawerCart';
-import { useSelector } from 'react-redux';
 import Logout from '../pages/Logout';
+import { BsCart3 } from "react-icons/bs"
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { getCartItems } from '../Redux/cart/cart.action';
 export default function Navbar() {
 
-
   const isAuth = useSelector((state) => state.user.isAuth)
-  console.log(isAuth)
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle , onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+  const { cartItems, quantity,msg } = useSelector(state => state.cart)
+  const dispatch = useDispatch()
+  const btnRef = React.useRef()
+  useEffect(() => {
+      dispatch(getCartItems())
+  }, [msg])
   return (
     <Box>
       <Flex
@@ -49,8 +55,7 @@ export default function Navbar() {
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}
-
-
+        border={'1px solid red'}
       >
         <Flex
           flex={{ base: 1, md: 'auto' }}
@@ -97,46 +102,39 @@ export default function Navbar() {
           >
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </Button>
-          {/* Cart Drawer */}
-          <DrawerCart />
-
+          <Button ref={btnRef} colorScheme='teal' onClick={onOpen}
+                display={{ base: 'none', md: 'inline-flex' }}
+                fontWeight={'bold'}
+                color={'white'}
+                bg={'#E80070'}
+                _hover={{
+                    bg: 'pink.400',
+                    color: "white"
+                }}>
+                <BsCart3 position={'relative'} style={{ fontSize: "30px", color: "black", marginRight: '-9px' }} /><span style={{ marginTop: '-24px', }} >{quantity.length}</span>
+            </Button>
           {
-            isAuth ? <Logout />  : <Link to='/signup'>
-            <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={15}
-              fontWeight={'bold'}
-              color={'white'}
-              bg={'#E80070'}
-              _hover={{
-                bg: 'pink.400',
-                color: "black"
-              }}
-            >
-              SignUp / LogIn
-            </Button>
-          </Link>
-              
-          }
+            isAuth ? <Logout /> : <Link to='/signup'>
+              <Button
+                display={{ base: 'none', md: 'inline-flex' }}
+                fontSize={15}
+                fontWeight={'bold'}
+                color={'white'}
+                bg={'#E80070'}
+                _hover={{
+                  bg: 'pink.400',
+                  color: "black"
+                }}
+        
 
-          {/* <Link to='/login'>
-            <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={15}
-              fontWeight={'bold'}
-              color={'white'}
-              bg={'#E80070'}
-              _hover={{
-                bg: 'pink.400',
-                color: "black"
-              }}>
-              Login
-            </Button>
-          </Link> */}
+              >
+                SignUp / LogIn
+              </Button>
+            </Link>
+          }
 
         </Stack>
       </Flex>
-
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
       </Collapse>
@@ -161,7 +159,6 @@ const DesktopNav = () => {
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
-
                 _hover={{
                   textDecoration: 'none',
                   color: linkHoverColor,
@@ -169,7 +166,6 @@ const DesktopNav = () => {
                 {navItem.label}
               </Link>
             </PopoverTrigger>
-
             {navItem.children && (
               <PopoverContent
                 border={0}

@@ -23,12 +23,11 @@ import { FiGift } from 'react-icons/fi'
 import { Link } from "react-router-dom"
 import ArrowUp from '../ArrowUp';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getCartItems } from '../../Redux/cart/cart.action';
+import { changeCartItems } from '../../Redux/cart/cart.action';
 
 
-const PackageTier = ({ item ,quantity}) => {
 
+export const PackageTier = ({ item, quantity, handlePlus, handleMinus }) => {
 
   return (
     <>
@@ -61,14 +60,14 @@ const PackageTier = ({ item ,quantity}) => {
           </HStack>
         </Box>
         <Box display='flex' alignItems='center' justifyContent={'center'} gap={2}>
-          <Button>+</Button>
+          <Button  onClick={()=>handlePlus(item._id)}>+</Button>
           <Box as='span'>
             {quantity}
           </Box>
-          <Button>-</Button>
+          <Button disabled={quantity==1} onClick={()=>handleMinus(item._id)}>-</Button>
         </Box>
         <Stack justifyContent={'center'} textAlign={'center'}>
-          <Heading size={'1xl'}>₹{item.price*quantity}</Heading>
+          <Heading size={'1xl'}>₹{item.price * quantity}</Heading>
         </Stack>
         <Stack justifyContent={'center'}>
           <Button
@@ -87,11 +86,14 @@ const Cart = () => {
   const dispatch = useDispatch()
   const { cartItems, quantity } = useSelector(state => state.cart)
 
+  const handleMinus = (id) => {
+    dispatch(changeCartItems(id,"minus"))
+  }
+  const handlePlus = (id) => {
+    dispatch(changeCartItems(id,"plus"))
+  }
 
 
-  useEffect(() => {
-    dispatch(getCartItems())
-  }, [])
 
   return (
     <>
@@ -143,7 +145,7 @@ const Cart = () => {
             {
               cartItems.map((el, i) => {
                 // console.log(el)
-                return <PackageTier item={el} quantity={quantity[i]} />
+                return <PackageTier item={el} quantity={quantity[i]} handlePlus={handlePlus} handleMinus={handleMinus} />
               })
             }
           </Stack>

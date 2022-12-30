@@ -5,7 +5,8 @@ import { HiShoppingBag } from "react-icons/hi"
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { postProduct } from '../../Redux/cart/cart.action'
+import { addCartItems, getCartItems, patchProductCart } from '../../Redux/cart/cart.action'
+const token = JSON.parse(localStorage.getItem("token"));
 function ProductList({ product }) {
   const [read, setRead] = useState(false)
   const navigate = useNavigate()
@@ -15,10 +16,22 @@ function ProductList({ product }) {
   }
 
 
-  const handleCart = (id) =>{
-    // dispatch(postProduct(id))
-      // navigate('/cart')
-      console.log(id)
+  const handleCart = (id) => {
+
+    // fetch(`http://localhost:8081/cart/edit/${id}`, {
+    //   method: "PATCH",
+    //   headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` }
+    // })
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     console.log(res);
+    //     dispatch(getCartItems())
+    //   })
+
+    // // dispatch(patchProductCart(id))
+    // // navigate('/cart')
+    // console.log(id)
+    dispatch(addCartItems(id))
   }
 
   return (
@@ -33,28 +46,28 @@ function ProductList({ product }) {
               alt='Dan Abramov'
             />
           </Box>
-          <Box p='2' textAlign={'start'}   
-          color={useColorModeValue('black', 'white')}
-          bg={useColorModeValue('white', 'gray.800')}
+          <Box p='2' textAlign={'start'}
+            color={useColorModeValue('black', 'white')}
+            bg={useColorModeValue('white', 'gray.800')}
           >
-            <Box  color='black.500'
+            <Box color='black.500'
               letterSpacing='wide'
               fontSize='xs'
               lineHeight={2}
-              fontWeight={'bold'} 
+              fontWeight={'bold'}
               fontFamily={'cursive'}>
-            Title:
-                <span style={{ textTransform: 'uppercase', color: '#388E3C' }}> {product.title}</span> 
+              Title:
+              <span style={{ textTransform: 'uppercase', color: '#388E3C' }}> {product.title}</span>
             </Box>
             <Box
               color='black.500'
               letterSpacing='wide'
               fontSize='xs'
               lineHeight={2}
-              fontWeight={'bold'} 
+              fontWeight={'bold'}
               fontFamily={'cursive'}
-            >Price: 
-              <span style={{ textTransform: 'uppercase', color: '#388E3C'}}> ₹{product.price}</span>  
+            >Price:
+              <span style={{ textTransform: 'uppercase', color: '#388E3C' }}> ₹{product.price}</span>
             </Box>
             <Box >
               <Text
@@ -62,10 +75,10 @@ function ProductList({ product }) {
                 letterSpacing='wide'
                 fontSize={12}
                 lineHeight={2}
-                fontWeight={'bold'} 
+                fontWeight={'bold'}
                 fontFamily={'cursive'}
               >Category:
-                <span style={{ textTransform: 'uppercase', color: '#388E3C'  }}> {product.category.name}</span>
+                <span style={{ textTransform: 'uppercase', color: '#388E3C' }}> {product.category.name}</span>
               </Text>
             </Box>
             <Box
@@ -105,7 +118,7 @@ function ProductList({ product }) {
                   _hover={{
                     bg: "black"
                   }}
-                  onClick={()=>handleCart(product._id)}
+                  onClick={() => handleCart(product._id)}
                 >
                   <HiShoppingBag size={30} color='white' />
                 </Button>

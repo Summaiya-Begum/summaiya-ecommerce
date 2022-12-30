@@ -17,6 +17,7 @@ function Pagination() {
         return (
 
                 <Button
+                border={'1px solid red'}
                     bg='#E80070'
                     color={'black'}
                     fontWeight={'bold'}

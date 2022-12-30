@@ -130,7 +130,7 @@ function ProductOfHome() {
                             _hover={{ boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}
 
                         >
-                            <VStack dir388E3Cection={['row', 'column']} alignItems={'center'} boxShadow={"rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"}
+                            <VStack direction={['row', 'column']} alignItems={'center'} boxShadow={"rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"}
                                 width={'100%'}
                                 borderRadius={'3xl'}
                             >

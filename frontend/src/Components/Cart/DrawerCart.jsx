@@ -11,11 +11,17 @@ import {
     Button
 } from '@chakra-ui/react'
 import { BsCart3 } from "react-icons/bs"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { getCartItems } from '../../Redux/cart/cart.action';
 function DrawerCart() {
-    const { cartItems, quantity } = useSelector(state => state.cart)
+    const { cartItems, quantity,msg } = useSelector(state => state.cart)
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const dispatch = useDispatch()
     const btnRef = React.useRef()
+    useEffect(() => {
+        dispatch(getCartItems())
+    }, [msg])
     return (
         <>
             <Button ref={btnRef} colorScheme='teal' onClick={onOpen}

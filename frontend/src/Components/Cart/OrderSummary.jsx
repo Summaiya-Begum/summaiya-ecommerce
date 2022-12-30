@@ -11,9 +11,10 @@ import {
 } from '@chakra-ui/react';
 import { FaArrowRight } from 'react-icons/fa'
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 export default function OrderSummary() {
     const { cartItems, quantity } = useSelector(state => state.cart)
-
+const navigate = useNavigate()
     const subtotal =  cartItems.reduce((acc,el,i)=>{
         return acc+= el.price*quantity[i]
     },0)
@@ -22,6 +23,10 @@ export default function OrderSummary() {
 const discount = (subtotal-(subtotal*62)/100)
 // console.log(discount)
 
+
+const handleProceed=()=>{
+    navigate('/payment')
+}
     return (
         <Box p={'0.5rem'} >
             <VStack spacing={1} textAlign="center">
@@ -98,7 +103,7 @@ const discount = (subtotal-(subtotal*62)/100)
                         py={5}
                         borderBottomRadius={'xl'}>
                         <Box w="80%" >
-                            <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
+                            <Button onClick={handleProceed} colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
                                 Checkout
                             </Button>
                         </Box>
