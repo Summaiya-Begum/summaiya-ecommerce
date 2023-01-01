@@ -73,7 +73,7 @@ cartRoutes.patch("/add/:id", async (req, res) => {
     return el.product_id == productId;
   });
   if (y) {
-    return res.send(`already added to cart`);
+    return res.send({msg:`already added to cart`});
   } else {
     // const new_obj = cart.push({ product_id: productId, item_quantity: 1 });
     const new_obj = [...cart, { product_id: productId, item_quantity: 1 }];

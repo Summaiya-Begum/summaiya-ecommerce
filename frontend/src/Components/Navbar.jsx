@@ -35,14 +35,14 @@ import { getCartItems } from '../Redux/cart/cart.action';
 export default function Navbar() {
 
   const isAuth = useSelector((state) => state.user.isAuth)
-  const { isOpen, onToggle , onOpen, onClose } = useDisclosure();
+  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  const { cartItems, quantity,msg } = useSelector(state => state.cart)
+  const { cartItems, quantity, msg } = useSelector(state => state.cart)
   const dispatch = useDispatch()
   const btnRef = React.useRef()
   useEffect(() => {
-      dispatch(getCartItems())
-  }, [msg])
+    dispatch(getCartItems())
+  }, [msg,quantity])
   return (
     <Box>
       <Flex
@@ -55,7 +55,6 @@ export default function Navbar() {
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}
-        border={'1px solid red'}
       >
         <Flex
           flex={{ base: 1, md: 'auto' }}
@@ -102,21 +101,23 @@ export default function Navbar() {
           >
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </Button>
-          <Button ref={btnRef} colorScheme='teal' onClick={onOpen}
-                display={{ base: 'none', md: 'inline-flex' }}
-                fontWeight={'bold'}
-                color={'white'}
-                bg={'#E80070'}
-                _hover={{
-                    bg: 'pink.400',
-                    color: "white"
-                }}>
-                <BsCart3 position={'relative'} style={{ fontSize: "30px", color: "black", marginRight: '-9px' }} /><span style={{ marginTop: '-24px', }} >{quantity.length}</span>
+          <Link to={'/cart'}>
+            <Button ref={btnRef} colorScheme='teal' onClick={onOpen}
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontWeight={'bold'}
+              color={'white'}
+              bg={'#E80070'}
+              _hover={{
+                bg: 'pink.400',
+                color: "white"
+              }}>
+              <BsCart3 position={'relative'} style={{ fontSize: "30px", color: "black", marginRight: '-9px' }} /><span style={{ marginTop: '-24px', }} >{quantity.length}</span>
             </Button>
+          </Link>
           {
             isAuth ? <Logout /> : <Link to='/signup'>
               <Button
-                display={{ base: 'none', md: 'inline-flex' }}
+                // display={{ base: 'none', md: 'inline-flex' }}
                 fontSize={15}
                 fontWeight={'bold'}
                 color={'white'}
@@ -125,8 +126,6 @@ export default function Navbar() {
                   bg: 'pink.400',
                   color: "black"
                 }}
-        
-
               >
                 SignUp / LogIn
               </Button>
@@ -178,6 +177,7 @@ const DesktopNav = () => {
                   {navItem.children.map((child) => (
                     <DesktopSubNav key={child.label} {...child} />
                   ))}
+
                 </Stack>
               </PopoverContent>
             )}
@@ -217,6 +217,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           flex={1}>
           <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
+        
       </Stack>
     </Link>
   );

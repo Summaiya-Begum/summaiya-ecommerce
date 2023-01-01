@@ -86,6 +86,8 @@ const Cart = () => {
   const dispatch = useDispatch()
   const { cartItems, quantity } = useSelector(state => state.cart)
 
+
+  
   const handleMinus = (id) => {
     dispatch(changeCartItems(id,"minus"))
   }
@@ -152,11 +154,11 @@ const Cart = () => {
           <Divider />
         </SimpleGrid>
 
-        <Flex direction="column" align="center" flex="1"  >
+        <Flex direction="column" align="end" flex="1"  >
           <OrderSummary />
           <HStack fontWeight="semibold">
             <p>or</p>
-            <Link color={('blue.500', 'blue.200')}>Continue shopping</Link>
+            <Link color={('blue.500', 'blue.200')} to={'/'}>Continue shopping</Link>
           </HStack>
         </Flex>
       </Flex>

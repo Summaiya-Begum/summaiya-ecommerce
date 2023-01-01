@@ -10,7 +10,7 @@ function Home() {
   return (
     <Box>
       <HomeSlider />
-      <HomeMultiSlider />
+      {/* <HomeMultiSlider /> */}
       <Product />
       <Footer />
     </Box>

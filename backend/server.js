@@ -8,6 +8,7 @@ const cors = require("cors");
 const authentication = require("./middleware/authentication");
 const BookRoutes = require("./routes/bookstore.route");
 const cartRoutes = require("./routes/cartproduct.route");
+const whishList = require("./routes/wishlist.route");
 require("dotenv").config(); // read env file
 
 const app = express();
@@ -31,7 +32,7 @@ app.post("/signup", async (req, res) => {
       });
       return res.send({ msg: "User Sign Up Successfull" });
     } else {
-      return res.send({ msg: "User Is Already Signed up" });
+      return res.send({ msg: "User Already Exists" });
     }
   } catch (err) {
     console.log(err);
@@ -67,7 +68,7 @@ app.post("/login", async (req, res) => {
 app.use("/products", productRoutes);
 app.use("/cart", authentication,cartRoutes)
 app.use("/bookstore", BookRoutes);
-
+app.use("/wishlist",whishList)
 // console.log(process.env.PORT)
 app.listen(process.env.PORT, async (req, res) => {
   try {

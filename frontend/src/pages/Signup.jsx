@@ -16,16 +16,15 @@ import {
     Radio,
     RadioGroup,
 } from '@chakra-ui/react';
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from "react-redux"
 import { getSignup } from '../Redux/auth/auth.action';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 function Signup() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const msg = useSelector((state) => state.user.msg)
     console.log(msg)
     const [showPassword, setShowPassword] = useState(false);
@@ -35,30 +34,19 @@ function Signup() {
         email: "",
         password: "",
         phonenumber: "",
-        gender: ""
+        gender: "male"
     })
 
-    const notify = () => toast.success(msg, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-
-    });
-
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
+       
         e.preventDefault()
         console.log(signupData)
-        await dispatch(getSignup(signupData))
-        if (msg) {
-            await notify()
+        dispatch(getSignup(signupData))
+         if (msg) {
+            alert(msg)
+            navigate('/login')
         }
     }
-
     const handleChange = (e) => {
         const { value, name } = e.target
         setSignupData({
@@ -148,19 +136,6 @@ function Signup() {
                                 >
                                     Sign up
                                 </Button>
-
-                                <ToastContainer
-                                    position="top-center"
-                                    autoClose={5000}
-                                    hideProgressBar={false}
-                                    newestOnTop={false}
-                                    closeOnClick
-                                    rtl={false}
-                                    pauseOnFocusLoss
-                                    draggable
-                                    pauseOnHover
-                                    theme="colored"
-                                />
                             </Stack>
                             <Stack pt={0}>
                                 <Text align={'center'}>

@@ -51,9 +51,13 @@ export const userReducer = (state = initState, action) => {
         isAuth: false,
         isError: true,
       };
-    case types.LOGIN_OUT:
+    case types.LOG_OUT:
+      localStorage.removeItem("token");
       return {
+        ...state,
         token: null,
+        isAuth:false,
+        user:null
       };
     default:
       return state;

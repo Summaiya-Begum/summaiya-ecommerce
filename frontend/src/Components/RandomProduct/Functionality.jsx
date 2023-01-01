@@ -6,7 +6,7 @@ function Functionality() {
     const dispatch = useDispatch()
 
     return (
-        <Stack border={'1px solid red'}>
+        <Stack>
             <Box
                 display={'flex'}
                 justifyContent={'space-around'}
@@ -14,7 +14,6 @@ function Functionality() {
                 m={'auto'}
                 mt={10}
                 w={'50%'}
-                border={'1px solid red'}
             >
                 <Select placeholder='Select Category' onChange={(e) => dispatch(filterProduct(e.target.value))} size='md' borderColor={'purple'}>
                     <option value="Electronics">Electronics</option>

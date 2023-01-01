@@ -19,8 +19,9 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { getLogin } from '../Redux/auth/auth.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom"
+import { useEffect } from 'react';
 function Login() {
-    const isAuth = useSelector((state) => state.user.isAuth)
+    const {msg,isAuth} = useSelector((state) => state.user)
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch()
     const navigate  = useNavigate()
@@ -30,15 +31,20 @@ function Login() {
         email: '',
         password: ''
     })
-
     const handleSubmit = (e) => {
         e.preventDefault()
         // console.log(loginData)
         dispatch(getLogin(loginData))
+        
+    }
+
+    useEffect(()=>{
         if(isAuth){
+            alert(msg)
            navigate('/') 
         }
-    }
+    },[isAuth])
+
 
     const handleChange = (e) => {
         const { value, name } = e.target

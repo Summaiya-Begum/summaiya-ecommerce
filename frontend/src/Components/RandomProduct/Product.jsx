@@ -27,8 +27,8 @@ function Product() {
   return (
     <>
 
-      <Box border={'1px solid red'}>
-        {isLoading ? <Image width={500} h={60} m={'auto'} src={loading} /> :
+      <Box >
+        {isLoading ? <Image width={"30%"} h={"30%"} m={'auto'} src={loading} /> :
           <Box>
             <Functionality />
 
@@ -43,10 +43,10 @@ function Product() {
           </Box>
         }
       </Box>
-      <Box border={'1px solid red'}>
-        <Pagination  />
+      <Box>
+        <Pagination />
       </Box>
-      <ArrowUp border={'1px solid red'} />
+      <ArrowUp />
     </>
 
 

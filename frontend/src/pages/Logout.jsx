@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Box,
     Flex,
@@ -16,13 +16,23 @@ import {
     useColorMode,
     Center,
 } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogout } from '../Redux/auth/auth.action';
+import { useNavigate } from 'react-router-dom';
 function Logout() {
-const isAuth = useSelector((state)=>state.user.isAuth)
+    const { isAuth, token } = useSelector((state) => state.user)
+    console.log(isAuth)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const handleLogout=()=>{
-
+    const handleLogout = () => {
+        dispatch(userLogout())
     }
+    useEffect(()=>{
+        if(!isAuth){
+            navigate('/')
+        }
+    },[])
     return (
         <>
             <Box color={'black'}>
