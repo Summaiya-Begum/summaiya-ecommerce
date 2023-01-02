@@ -1,7 +1,6 @@
 import * as types from "./cart.actionType";
 const initState = {
   cartItems: [],
-  quantity: [],
   msg: "",
 };
 export const cartReducer = (state = initState, action) => {
@@ -10,8 +9,7 @@ export const cartReducer = (state = initState, action) => {
     case types.GET_CART_ITEMS:
       return {
         ...state,
-        cartItems: payload.getProduct,
-        quantity: payload.quantity,
+        cartItems: payload.cart,
       };
     case types.ADD_CART_ITEMS:
       return { ...state, msg: payload };

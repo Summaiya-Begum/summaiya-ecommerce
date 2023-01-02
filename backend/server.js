@@ -8,7 +8,7 @@ const cors = require("cors");
 const authentication = require("./middleware/authentication");
 const BookRoutes = require("./routes/bookstore.route");
 const cartRoutes = require("./routes/cartproduct.route");
-const whishList = require("./routes/wishlist.route");
+const wishList = require("./routes/wishlist.route");
 require("dotenv").config(); // read env file
 
 const app = express();
@@ -67,8 +67,8 @@ app.post("/login", async (req, res) => {
 // app.use('/admin', adminRoutes)
 app.use("/products", productRoutes);
 app.use("/cart", authentication, cartRoutes);
-app.use("/bookstore", authentication, BookRoutes);
-app.use("/wishlist", whishList);
+app.use("/bookstore",  BookRoutes);
+app.use("/wishlist",authentication, wishList);
 // console.log(process.env.PORT)
 app.listen(process.env.PORT, async (req, res) => {
   try {

@@ -37,12 +37,12 @@ export default function Navbar() {
   const isAuth = useSelector((state) => state.user.isAuth)
   const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  const { cartItems, quantity, msg } = useSelector(state => state.cart)
+  const { cartItems, msg } = useSelector(state => state.cart)
   const dispatch = useDispatch()
   const btnRef = React.useRef()
   useEffect(() => {
     dispatch(getCartItems())
-  }, [msg,quantity])
+  }, [msg,cartItems.length])
   return (
     <Box>
       <Flex
@@ -111,7 +111,7 @@ export default function Navbar() {
                 bg: 'pink.400',
                 color: "white"
               }}>
-              <BsCart3 position={'relative'} style={{ fontSize: "30px", color: "black", marginRight: '-9px' }} /><span style={{ marginTop: '-24px', }} >{quantity.length}</span>
+              <BsCart3 position={'relative'} style={{ fontSize: "30px", color: "black", marginRight: '-9px' }} /><span style={{ marginTop: '-24px', }} >{cartItems.length}</span>
             </Button>
           </Link>
           {

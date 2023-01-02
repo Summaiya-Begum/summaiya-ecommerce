@@ -42,7 +42,7 @@ export const changeCartItems=(id,qty)=>(dispatch)=>{
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res.data);
+      console.log(res);
       dispatch({ type: types.CHANGE_CART_ITEMS, payload: res });
     });
 }

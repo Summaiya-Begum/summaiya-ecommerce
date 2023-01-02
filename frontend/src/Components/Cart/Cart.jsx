@@ -27,7 +27,7 @@ import { changeCartItems } from '../../Redux/cart/cart.action';
 
 
 
-export const PackageTier = ({ item, quantity, handlePlus, handleMinus }) => {
+export const PackageTier = ({ item, handlePlus, handleMinus }) => {
 
   return (
     <>
@@ -62,12 +62,12 @@ export const PackageTier = ({ item, quantity, handlePlus, handleMinus }) => {
         <Box display='flex' alignItems='center' justifyContent={'center'} gap={2}>
           <Button  onClick={()=>handlePlus(item._id)}>+</Button>
           <Box as='span'>
-            {quantity}
+            {item.quantity}
           </Box>
-          <Button disabled={quantity==1} onClick={()=>handleMinus(item._id)}>-</Button>
+          <Button disabled={item.quantity==1} onClick={()=>handleMinus(item._id)}>-</Button>
         </Box>
         <Stack justifyContent={'center'} textAlign={'center'}>
-          <Heading size={'1xl'}>₹{item.price * quantity}</Heading>
+          <Heading size={'1xl'}>₹{item.price * item.quantity}</Heading>
         </Stack>
         <Stack justifyContent={'center'}>
           <Button
@@ -84,7 +84,7 @@ export const PackageTier = ({ item, quantity, handlePlus, handleMinus }) => {
 
 const Cart = () => {
   const dispatch = useDispatch()
-  const { cartItems, quantity } = useSelector(state => state.cart)
+  const { cartItems } = useSelector(state => state.cart)
 
 
   
@@ -139,7 +139,7 @@ const Cart = () => {
             >
               <Stack>
                 <Heading size={'lg'}>
-                  Cart  Items:  <span style={{ color: "#E80070" }}>{quantity.length}</span>
+                  Cart  Items:  <span style={{ color: "#E80070" }}>{cartItems.length}</span>
                 </Heading>
               </Stack>
             </VStack>
@@ -147,7 +147,7 @@ const Cart = () => {
             {
               cartItems.map((el, i) => {
                 // console.log(el)
-                return <PackageTier item={el} quantity={quantity[i]} handlePlus={handlePlus} handleMinus={handleMinus} />
+                return <PackageTier item={el} handlePlus={handlePlus} handleMinus={handleMinus} key={i}/>
               })
             }
           </Stack>

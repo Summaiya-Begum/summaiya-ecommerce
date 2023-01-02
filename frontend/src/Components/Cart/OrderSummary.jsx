@@ -13,10 +13,10 @@ import { FaArrowRight } from 'react-icons/fa'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 export default function OrderSummary() {
-    const { cartItems, quantity } = useSelector(state => state.cart)
+    const { cartItems} = useSelector(state => state.cart)
 const navigate = useNavigate()
     const subtotal =  cartItems.reduce((acc,el,i)=>{
-        return acc+= el.price*quantity[i]
+        return acc+= el.price*el.quantity
     },0)
 // console.log(subtotal)
 
@@ -93,7 +93,7 @@ const handleProceed=()=>{
                             </Text>
 
                             <Text fontSize="1xl" fontWeight="500">
-                            ₹ {discount}
+                            ₹ {(discount).toFixed(2)}
                             </Text>
 
                         </HStack>

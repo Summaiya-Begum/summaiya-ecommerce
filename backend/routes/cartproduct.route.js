@@ -8,15 +8,7 @@ cartRoutes.get("/", async (req, res) => {
 
   const user = await userModel.findOne({ _id: userId });
   let cart = user.cartitems;
-  const x = cart.map((el, i) => {
-    return el.product_id;
-  });
-  const quantity = cart.map((el, i) => {
-    return el.item_quantity;
-  });
-  const getProduct = await productModel.find({ _id: { $in: x } });
-  console.log(getProduct);
-  res.send({ getProduct, quantity });
+  res.send({ msg: "Product Added Successfull", cart });
 });
 
 cartRoutes.patch("/edit/:id", async (req, res) => {
@@ -33,10 +25,10 @@ cartRoutes.patch("/edit/:id", async (req, res) => {
   // });
   // if (y) {
   const changeQuantity = cart.map((el, i) => {
-    return el.product_id == productId
+    return el._id == productId
       ? {
           ...el,
-          item_quantity:qty=="plus"? el.item_quantity++:el.item_quantity--,
+          quantity: qty == "plus" ? el.quantity++ : el.quantity--,
         }
       : el;
   });
@@ -44,53 +36,52 @@ cartRoutes.patch("/edit/:id", async (req, res) => {
     { _id: userId },
     { $set: { cartitems: changeQuantity } }
   );
-  return res.send({msg:"succesfully changed"});
-  // }
-  //  else {
-  //   // const new_obj = cart.push({ product_id: productId, item_quantity: 1 });
-  //   const new_obj = [...cart, { product_id: productId, item_quantity: 1 }];
-  //   await userModel.updateOne(
-  //     { _id: userId },
-  //     { $set: { cartitems: new_obj } }
-  //   );
-  // }
-
-  //   await userModel.updateOne({ _id: userId }, { $set: { cartitems: [obj] } });
-  // console.log(user)
-  // res.send("updated successfully");
+  return res.send({ msg: "Product Quantity Added Succesfully" });
 });
 
-// adding product to cart
+// Adding product to cart
 cartRoutes.patch("/add/:id", async (req, res) => {
   // res.send(req.body);
   const productId = req.params.id;
+  const product = await productModel.findOne({ _id: productId });
 
   const { userId } = req.body;
   const user = await userModel.findOne({ _id: userId });
 
   const cart = user.cartitems;
+  // console.log(cart);
+  const c = cart.map((el, i) => {
+    return el.quantity;
+  });
+  console.log(c);
   let y = cart.find((el) => {
-    return el.product_id == productId;
+    return el._id == productId;
   });
   if (y) {
-    return res.send({msg:`already added to cart`});
+    return res.send({ msg: `Already Added to Cart` });
   } else {
-    // const new_obj = cart.push({ product_id: productId, item_quantity: 1 });
-    const new_obj = [...cart, { product_id: productId, item_quantity: 1 }];
-    await userModel.updateOne(
+    await userModel.findByIdAndUpdate(
       { _id: userId },
-      { $set: { cartitems: new_obj } }
+      { $push: { cartitems: { ...product } } },
+      { new: true }
     );
   }
-
-  //   await userModel.updateOne({ _id: userId }, { $set: { cartitems: [obj] } });
-  // console.log(user)
-  return res.send("product added successfully");
+  return res.send({ msg: "Product Added Successfully" });
 });
 
 // Delete Cart Item
-cartRoutes.delete("/edit/:id", (req, res) => {
-  // const {}
+cartRoutes.delete("/delete/:id", async (req, res) => {
+  const product_id = req.params.id;
+  const { userId } = req.body;
+  console.log(product_id);
+  // const user = await userModel.findOne({_id:userId})
+  // const cartItem =   user.cartItems
+  userModel.findByIdAndUpdate(
+    userId,
+    { $pull: { cartItems: { _id: product_id } } },
+    { new: true }
+  );
+  res.send({ msg: "Product Item Deleted Successfull" });
 });
 
 module.exports = cartRoutes;

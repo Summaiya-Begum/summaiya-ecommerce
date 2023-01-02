@@ -1,39 +1,38 @@
 const { Router } = require("express");
 const userModel = require("../models/User.model");
 
-const whishList = Router();
+const wishList = Router();
 
-whishList.get("/", (req, res) => {
+wishList.get("/", (req, res) => {
   res.send({ Msg: "Welcome Wish Home List" });
 });
-whishList.patch("/edit/:id", async (req, res) => {
+
+wishList.patch("/edit/:id", async (req, res) => {
   const productId = req.params.id;
-  console.log(productId);
-  const userId = req.body;
-  console.log(userId);
+  const { userId } = req.body;
   try {
-    const wishlist = user.whishlist;
-    const user = userModel.findById({ _id: userId });
-    const alReadyAddedProd = await wishlist.find((id) => id === productId);
+    const user = await userModel.findOne({ _id: userId });
+    const wishlist = user.wishlist;
+    const alReadyAddedProd = wishlist.find(
+      (el, i) => el.product_id === productId
+    );
     console.log(alReadyAddedProd);
     if (alReadyAddedProd) {
-      //    const userWish = await userModel.findByIdAndUpdate(
-      //      _id,
-      //      { $pull: { whishlist: productId } },
-      //      { new: true }
-      //    );
-      //    res.send(userWish);
+      return res.send({ msg: "Product Already Added in Wishlist" });
     } else {
-      // const userWish = await userModel.findByIdAndUpdate(
-      //   _id,
-      //   { $push: { whishlist: productId } },
-      //   { new: true }
-      // );
-      // res.send(userWish);
+      const userWish = await userModel.findByIdAndUpdate(
+        { _id: userId },
+        { $push: { wishlist: { product_id: productId } } }
+        //   { new: true }
+      );
+      return res.send({
+        msg: "Product Added Successfull in Wishlist",
+        userWish,
+      });
     }
   } catch (error) {
-    throw new Error(error);
+    res.send(error);
   }
 });
 
-module.exports = whishList;
+module.exports = wishList;
