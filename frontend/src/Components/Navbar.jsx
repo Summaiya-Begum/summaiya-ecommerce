@@ -177,7 +177,6 @@ const DesktopNav = () => {
                   {navItem.children.map((child) => (
                     <DesktopSubNav key={child.label} {...child} />
                   ))}
-
                 </Stack>
               </PopoverContent>
             )}
@@ -216,8 +215,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           align={'center'}
           flex={1}>
           <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
-        
+        </Flex>       
       </Stack>
     </Link>
   );

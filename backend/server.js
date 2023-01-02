@@ -63,12 +63,12 @@ app.post("/login", async (req, res) => {
   }
 });
 
-//  Routers 
+//  Routers
 // app.use('/admin', adminRoutes)
 app.use("/products", productRoutes);
-app.use("/cart", authentication,cartRoutes)
-app.use("/bookstore", BookRoutes);
-app.use("/wishlist",whishList)
+app.use("/cart", authentication, cartRoutes);
+app.use("/bookstore", authentication, BookRoutes);
+app.use("/wishlist", whishList);
 // console.log(process.env.PORT)
 app.listen(process.env.PORT, async (req, res) => {
   try {

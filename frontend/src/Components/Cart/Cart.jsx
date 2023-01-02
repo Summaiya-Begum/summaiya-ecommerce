@@ -100,7 +100,7 @@ const Cart = () => {
   return (
     <>
       <Flex
-        border={'2px solid orange'}
+        // border={'2px solid orange'}
         py={{
           lg: '5rem',
           md: '2rem'
