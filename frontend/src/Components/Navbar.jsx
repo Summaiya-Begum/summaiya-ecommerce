@@ -25,16 +25,13 @@ import {
   MoonIcon,
 
 } from '@chakra-ui/icons';
-
 import { Link } from 'react-router-dom';
-import Logout from '../pages/Logout';
+import User from '../pages/User';
 import { BsCart3 } from "react-icons/bs"
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react';
 import { getCartItems } from '../Redux/cart/cart.action';
 export default function Navbar() {
-
-  const isAuth = useSelector((state) => state.user.isAuth)
   const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const { cartItems, msg } = useSelector(state => state.cart)
@@ -42,7 +39,7 @@ export default function Navbar() {
   const btnRef = React.useRef()
   useEffect(() => {
     dispatch(getCartItems())
-  }, [msg,cartItems.length])
+  }, [msg, cartItems.length])
   return (
     <Box>
       <Flex
@@ -95,43 +92,36 @@ export default function Navbar() {
           {/* Dark / Light Mode Button  */}
           <Button bg={'black'} onClick={toggleColorMode}
             _hover={{
-              bg: 'pink.400',
+              bg: '#E80070',
               color: "black"
             }}
           >
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </Button>
+
+          {/* CART SECTION COMPONENT LINK */}
           <Link to={'/cart'}>
-            <Button ref={btnRef} colorScheme='teal' onClick={onOpen}
+            <Button
+
+              ref={btnRef} colorScheme='teal' onClick={onOpen}
               display={{ base: 'none', md: 'inline-flex' }}
               fontWeight={'bold'}
               color={'white'}
-              bg={'#E80070'}
+              bg={'black'}
+              // bg={'#E80070'}
               _hover={{
-                bg: 'pink.400',
-                color: "white"
+                bg: '#E80070',
+                color: "black"
               }}>
-              <BsCart3 position={'relative'} style={{ fontSize: "30px", color: "black", marginRight: '-9px' }} /><span style={{ marginTop: '-24px', }} >{cartItems.length}</span>
+              <BsCart3 position={'relative'} style={{ fontSize: "30px", marginRight: '-9px' }} _hover={{
+                color: "#E80070"
+              }} /><span style={{ marginTop: '-24px', }}  >{cartItems.length}</span>
             </Button>
           </Link>
-          {
-            isAuth ? <Logout /> : <Link to='/signup'>
-              <Button
-                // display={{ base: 'none', md: 'inline-flex' }}
-                fontSize={15}
-                fontWeight={'bold'}
-                color={'white'}
-                bg={'#E80070'}
-                _hover={{
-                  bg: 'pink.400',
-                  color: "black"
-                }}
-              >
-                SignUp / LogIn
-              </Button>
-            </Link>
-          }
 
+          {/* USER AUTH SECTION COMPONENT */}
+          <User />
+          {/* USER AUTH SECTION COMPONENT */}
         </Stack>
       </Flex>
       <Collapse in={isOpen} animateOpacity>
@@ -215,7 +205,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           align={'center'}
           flex={1}>
           <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>       
+        </Flex>
       </Stack>
     </Link>
   );
@@ -298,7 +288,7 @@ const NAV_ITEMS = [
       {
         label: 'Beauty Products',
         subLabel: 'Trending Brand Cosmetic',
-        href: '/beautyproduct',
+        href: '#',
       },
     ],
   },

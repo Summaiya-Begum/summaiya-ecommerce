@@ -7,9 +7,8 @@ wishList.get("/", async (req, res) => {
   const { userId } = req.body;
   const user = await userModel.findOne({ _id: userId });
   const wishlistData = user.wishlist;
-
   // console.log(wishlistData);
-  res.send({ Msg: "Welcome Wish Home List", wishData: wishlistData });
+  res.send({ msg: "Welcome Wish Home List", wishData: wishlistData });
 });
 
 wishList.patch("/edit/:id", async (req, res) => {

@@ -3,10 +3,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../Redux/products/product.action';
 import ProductList from './ProductList';
-import { Box, Heading, SimpleGrid, Image, Input } from '@chakra-ui/react'
+import { Box, SimpleGrid, Image } from '@chakra-ui/react'
 import Functionality from './Functionality';
 import Pagination from './Pagination';
-import Footer from '../Footer';
 import ArrowUp from '../ArrowUp';
 import loading from '../../assest/loading.gif'
 function Product() {

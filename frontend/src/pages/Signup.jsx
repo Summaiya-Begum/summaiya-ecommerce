@@ -22,7 +22,7 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from "react-redux"
 import { getSignup } from '../Redux/auth/auth.action';
 import { useEffect } from 'react';
-import { validEmail, validPassword } from './RegEx';
+import { validEmail, validPassword } from '../RegEx';
 function Signup() {
     const dispatch = useDispatch()
     const navigate = useNavigate()

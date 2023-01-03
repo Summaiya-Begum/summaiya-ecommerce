@@ -36,7 +36,7 @@ function ProductList({ product }) {
 
   // WishList
   const handleWishList = (id) =>{
-
+    
   }
 
   return (
