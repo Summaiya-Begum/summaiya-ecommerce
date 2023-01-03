@@ -18,12 +18,7 @@ cartRoutes.patch("/edit/:id", async (req, res) => {
   const { userId, qty } = req.body;
   console.log(req.body);
   const user = await userModel.findOne({ _id: userId });
-
   const cart = user.cartitems;
-  // let y = cart.find((el) => {
-  //   return el.product_id == productId;
-  // });
-  // if (y) {
   const changeQuantity = cart.map((el, i) => {
     return el._id == productId
       ? {
@@ -74,14 +69,15 @@ cartRoutes.delete("/delete/:id", async (req, res) => {
   const product_id = req.params.id;
   const { userId } = req.body;
   console.log(product_id);
-  // const user = await userModel.findOne({_id:userId})
-  // const cartItem =   user.cartItems
-  userModel.findByIdAndUpdate(
-    userId,
-    { $pull: { cartItems: { _id: product_id } } },
-    { new: true }
-  );
-  res.send({ msg: "Product Item Deleted Successfull" });
+  try {
+    await userModel.updateOne(
+      { _id: userId },
+      { $pull: { cartitems: { _id: product_id } } }
+    );
+    res.send({ msg: "Product Item Deleted Successfull" });
+  } catch (err) {
+    res.send({ msg: `${product_id} Remove item failed` });
+  }
 });
 
 module.exports = cartRoutes;

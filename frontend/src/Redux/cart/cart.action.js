@@ -47,4 +47,17 @@ export const changeCartItems=(id,qty)=>(dispatch)=>{
     });
 }
 
+// Delete Cart Item 
 
+export const dltCartItem  = (id) => (dispatch) =>{
+  axios.delete(`http://localhost:8081/cart/delete/${id}`,{
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+  },
+  })
+  // .then((res)=>console.log(res.data))
+  .then((res)=>dispatch({type:types.REMOVE_CART_ITEMS, payload:res}))
+  .catch((err)=>console.log(err))
+
+}

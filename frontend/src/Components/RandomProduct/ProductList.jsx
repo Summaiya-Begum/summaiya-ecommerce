@@ -17,7 +17,6 @@ function ProductList({ product }) {
 
 
   const handleCart = (id) => {
-
     // fetch(`http://localhost:8081/cart/edit/${id}`, {
     //   method: "PATCH",
     //   headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` }
@@ -32,6 +31,12 @@ function ProductList({ product }) {
     // // navigate('/cart')
     // console.log(id)
     dispatch(addCartItems(id))
+  }
+
+
+  // WishList
+  const handleWishList = (id) =>{
+
   }
 
   return (
@@ -105,6 +110,9 @@ function ProductList({ product }) {
                   _hover={{
                     bg: 'black',
                   }}
+
+                  onClick={()=>handleWishList(product._id)}
+
                 >
                   <GiHearts size={30} color='white' />
                 </Button>

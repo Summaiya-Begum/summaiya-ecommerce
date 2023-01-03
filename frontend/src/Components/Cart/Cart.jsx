@@ -23,11 +23,11 @@ import { FiGift } from 'react-icons/fi'
 import { Link } from "react-router-dom"
 import ArrowUp from '../ArrowUp';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCartItems } from '../../Redux/cart/cart.action';
+import { changeCartItems, dltCartItem } from '../../Redux/cart/cart.action';
 
 
 
-export const PackageTier = ({ item, handlePlus, handleMinus }) => {
+export const PackageTier = ({ item, handlePlus, handleMinus, handledeleteitem }) => {
 
   return (
     <>
@@ -60,11 +60,11 @@ export const PackageTier = ({ item, handlePlus, handleMinus }) => {
           </HStack>
         </Box>
         <Box display='flex' alignItems='center' justifyContent={'center'} gap={2}>
-          <Button  onClick={()=>handlePlus(item._id)}>+</Button>
+          <Button onClick={() => handlePlus(item._id)}>+</Button>
           <Box as='span'>
             {item.quantity}
           </Box>
-          <Button disabled={item.quantity==1} onClick={()=>handleMinus(item._id)}>-</Button>
+          <Button disabled={item.quantity == 1} onClick={() => handleMinus(item._id)}>-</Button>
         </Box>
         <Stack justifyContent={'center'} textAlign={'center'}>
           <Heading size={'1xl'}>₹{item.price * item.quantity}</Heading>
@@ -73,7 +73,9 @@ export const PackageTier = ({ item, handlePlus, handleMinus }) => {
           <Button
             size="md"
             color={useColorModeValue('black', 'white')}
-            bg={useColorModeValue('white', 'gray.800')}>
+            bg={useColorModeValue('white', 'gray.800')}
+            onClick={() => handledeleteitem(item._id)}
+          >
             <CloseIcon />
           </Button>
         </Stack>
@@ -87,12 +89,16 @@ const Cart = () => {
   const { cartItems } = useSelector(state => state.cart)
 
 
-  
+
   const handleMinus = (id) => {
-    dispatch(changeCartItems(id,"minus"))
+    dispatch(changeCartItems(id, "minus"))
   }
   const handlePlus = (id) => {
-    dispatch(changeCartItems(id,"plus"))
+    dispatch(changeCartItems(id, "plus"))
+  }
+
+  const handledeleteitem = (id) => {
+    dispatch(dltCartItem(id))
   }
 
 
@@ -147,7 +153,7 @@ const Cart = () => {
             {
               cartItems.map((el, i) => {
                 // console.log(el)
-                return <PackageTier item={el} handlePlus={handlePlus} handleMinus={handleMinus} key={i}/>
+                return <PackageTier item={el} handlePlus={handlePlus} handleMinus={handleMinus} key={i} handledeleteitem={handledeleteitem} />
               })
             }
           </Stack>
