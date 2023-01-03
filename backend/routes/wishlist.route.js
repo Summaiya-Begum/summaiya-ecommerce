@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { productModel } = require("../models/Product.model");
 const userModel = require("../models/User.model");
 
 const wishList = Router();
@@ -8,7 +9,15 @@ wishList.get("/", async (req, res) => {
   const user = await userModel.findOne({ _id: userId });
   const wishlistData = user.wishlist;
   // console.log(wishlistData);
-  res.send({ msg: "Welcome Wish Home List", wishData: wishlistData });
+
+  let data = await productModel.find({
+    _id: {
+      $in: wishlistData,
+    },
+  });
+  console.log(data);
+
+  res.send({ msg: "Welcome Wish Home List", wishData: data });
 });
 
 wishList.patch("/edit/:id", async (req, res) => {
@@ -17,17 +26,15 @@ wishList.patch("/edit/:id", async (req, res) => {
   try {
     const user = await userModel.findOne({ _id: userId });
     const wishlist = user.wishlist;
-    const alReadyAddedProd = wishlist.find(
-      (el, i) => el.product_id === productId
-    );
+    const alReadyAddedProd = wishlist.find((el, i) => el === productId);
     console.log(alReadyAddedProd);
     if (alReadyAddedProd) {
       return res.send({ msg: "Product Already Added in Wishlist" });
     } else {
       const userWish = await userModel.findByIdAndUpdate(
         { _id: userId },
-        { $push: { wishlist: { product_id: productId } } }
-        //   { new: true }
+        { $push: { wishlist: productId } },
+          { new: true }
       );
       return res.send({
         msg: "Product Added Successfull in Wishlist",
@@ -49,7 +56,7 @@ wishList.delete("/delete/:id", async (req, res) => {
   try {
     await userModel.updateOne(
       { _id: userId },
-      { $pull: { wishlist: { _id: productId } } }
+      { $pull: { wishlist: productId } }
     );
     res.send({ msg: "WishList Product data is Deleted Successfull" });
   } catch (err) {

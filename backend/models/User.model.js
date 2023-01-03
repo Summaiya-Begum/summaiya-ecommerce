@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema(
         quantity: { type: Number, default: 1 },
       },
     ],
-    wishlist: [{ product_id: { type: String, required: true } }],
+    wishlist: [{ type: String, required: true } ],
   },
   {
     versionKey: false,

@@ -11,6 +11,8 @@ import {
 } from '@chakra-ui/react';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FiShoppingCart, FiDelete } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteData } from '../../Redux/wishlist/wishlist.action';
 
 const data = {
   isNew: true,
@@ -50,11 +52,18 @@ function Rating({ rating, numReviews }) {
 }
 
 function WhisListCard({ item }) {
+  const dispatch = useDispatch()
+  const {msg} = useSelector((state)=>state.wishlist)
+  
+
+  
   return (
-    <Flex p={50} w="full" alignItems="center" justifyContent="center">
+
+    <Flex p={5} w="full" alignItems="center" justifyContent="center">
       <Box
         bg={useColorModeValue('white', 'gray.800')}
         maxW="sm"
+        p={'1rem'}
         borderWidth="1px"
         rounded="lg"
         shadow="lg"
@@ -78,12 +87,13 @@ function WhisListCard({ item }) {
         <Box p="6">
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
-              fontSize="2xl"
+              fontSize="1xl"
               fontWeight="semibold"
               as="h4"
               lineHeight="tight"
               isTruncated>
-              {item.name}
+
+              {item.title}
             </Box>
             <Tooltip
               label="Add to cart"
@@ -91,7 +101,7 @@ function WhisListCard({ item }) {
               placement={'top'}
               color={'gray.800'}
               fontSize={'1.2em'}>
-              <chakra.a href={'#'} display={'flex'}>
+              <chakra.a display={'flex'}>
                 <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
               </chakra.a>
             </Tooltip>
@@ -101,16 +111,16 @@ function WhisListCard({ item }) {
               placement={'top'}
               color={'gray.800'}
               fontSize={'1.2em'}>
-              <chakra.a href={'#'} display={'flex'}>
-                <Icon as={FiDelete} h={7} w={7} alignSelf={'center'} />
+              <chakra.a display={'flex'}>
+                <Icon onClick={() => dispatch(deleteData(item._id))} as={FiDelete} h={7} w={7} alignSelf={'center'} />
               </chakra.a>
             </Tooltip>
           </Flex>
 
-          <Flex justifyContent="space-between" alignContent="center">
+          <Flex justifyContent="space-between" alignContent="center" mt={5}>
             <Rating rating={data.rating} numReviews={data.numReviews} />
             <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-              <Box as="span" color={'gray.600'} fontSize="lg">
+              <Box as="span" color={'gray.600'} fontSize="xl" p={'0.5rem'}>
                 ₹
               </Box>
               {item.price}

@@ -30,7 +30,46 @@ export const wishlistReducer = (state = init, action) => {
         wishlistData: [],
         msg: payload.msg,
       };
+
+    case types.PATCH_WISHLIST_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case types.PATCH_WISHLIST_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        msg: payload.msg,
+        wishlistData: payload.userWish,
+      };
+    case types.PATCH_WISHLIST_ERROR:
+      return {
+        wishlistData: [],
+        isError: true,
+        msg:payload.msg
+      };
+
+    case types.REMOVE_WISHLIST_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case types.REMOVE_WISHLIST_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        msg: payload,
+      };
+    case types.REMOVE_WISHLIST_ERROR:
+      return {
+        isLoading:false,
+        wishlistData: [],
+        isError: true,
+      };
     default:
       return state;
   }
 };
+
+

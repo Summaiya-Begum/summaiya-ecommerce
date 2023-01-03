@@ -5,7 +5,6 @@ const cartRoutes = Router();
 
 cartRoutes.get("/", async (req, res) => {
   const { userId } = req.body;
-
   const user = await userModel.findOne({ _id: userId });
   let cart = user.cartitems;
   res.send({ msg: "Product Added Successfull", cart });

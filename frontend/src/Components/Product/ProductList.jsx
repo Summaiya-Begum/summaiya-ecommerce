@@ -5,8 +5,11 @@ import { HiShoppingBag } from "react-icons/hi"
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { addCartItems, getCartItems, patchProductCart } from '../../Redux/cart/cart.action'
+import { addCartItems } from '../../Redux/cart/cart.action'
+import { addData } from '../../Redux/wishlist/wishlist.action'
+
 const token = JSON.parse(localStorage.getItem("token"));
+
 function ProductList({ product }) {
   const [read, setRead] = useState(false)
   const navigate = useNavigate()
@@ -34,10 +37,7 @@ function ProductList({ product }) {
   }
 
 
-  // WishList
-  const handleWishList = (id) =>{
-    
-  }
+
 
   return (
     <Box height={'auto'} boxShadow='2xl' p='2' rounded='md' bg='white'>
@@ -111,7 +111,7 @@ function ProductList({ product }) {
                     bg: 'black',
                   }}
 
-                  onClick={()=>handleWishList(product._id)}
+                  onClick={() => dispatch(addData(product._id))}
 
                 >
                   <GiHearts size={30} color='white' />

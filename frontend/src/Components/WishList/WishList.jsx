@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from '@chakra-ui/react'
+import { Box, Heading, SimpleGrid } from '@chakra-ui/react'
 import React from 'react'
 import WhisListCard from './WhisListCard'
 
@@ -19,21 +19,20 @@ import { getData } from '../../Redux/wishlist/wishlist.action'
 // }
 function WishList() {
     const { wishlistData, msg } = useSelector((state) => state.wishlist)
-    const product = useSelector((state) => state.products)
     console.log(wishlistData, msg)
     const dispatch = useDispatch()
-    console.log(product)
 
     useEffect(() => {
         dispatch(getData())
-    }, [])
+    }, [wishlistData.length])
     return (
         <Box>
-
-            <SimpleGrid columns={[1, 2, 3, 4]} borderRadius={'3xl'}
-                spacing='20px' p={'2rem'}>
+            <Heading>WishList Items: {wishlistData.length}</Heading>
+            <SimpleGrid columns={[1, 2, 3]} borderRadius={'3xl'}
+                spacing='10px' p={'1rem'}>
                 {
                     wishlistData.map((item, i) => {
+                        console.log(item)
                         return (
                             <WhisListCard item={item} key={i} />
                         )
