@@ -4,6 +4,7 @@ const userModel = require("../models/User.model");
 
 const wishList = Router();
 
+// Get Wishlist Product
 wishList.get("/", async (req, res) => {
   const { userId } = req.body;
   const user = await userModel.findOne({ _id: userId });
@@ -17,9 +18,10 @@ wishList.get("/", async (req, res) => {
   });
   console.log(data);
 
-  res.send({ msg: "Welcome Wish Home List", wishData: data });
+  res.send({ msg: "Welcome WishList Home ", wishData: data });
 });
 
+//  Edit Wishlist Product
 wishList.patch("/edit/:id", async (req, res) => {
   const productId = req.params.id;
   const { userId } = req.body;
@@ -27,14 +29,14 @@ wishList.patch("/edit/:id", async (req, res) => {
     const user = await userModel.findOne({ _id: userId });
     const wishlist = user.wishlist;
     const alReadyAddedProd = wishlist.find((el, i) => el === productId);
-    console.log(alReadyAddedProd);
+    // console.log(alReadyAddedProd);
     if (alReadyAddedProd) {
       return res.send({ msg: "Product Already Added in Wishlist" });
     } else {
       const userWish = await userModel.findByIdAndUpdate(
         { _id: userId },
         { $push: { wishlist: productId } },
-          { new: true }
+        { new: true }
       );
       return res.send({
         msg: "Product Added Successfull in Wishlist",
@@ -47,7 +49,6 @@ wishList.patch("/edit/:id", async (req, res) => {
 });
 
 // Delete WishList Product
-
 wishList.delete("/delete/:id", async (req, res) => {
   const { userId } = req.body;
   // console.log(userId)

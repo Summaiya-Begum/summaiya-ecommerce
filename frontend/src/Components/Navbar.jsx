@@ -308,12 +308,12 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: 'Admin Page',
-    href: '/admin',
+    label: 'Add Blog',
+    href: '/blog',
   },
   {
-    label: 'Accessories',
-    href: '#',
+    label: 'My Blog',
+    href: 'myblog',
   },
 ];
 

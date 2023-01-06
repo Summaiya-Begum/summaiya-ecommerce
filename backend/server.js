@@ -3,12 +3,12 @@ const dataConnection = require("./config/database");
 const userModel = require("./models/User.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const productRoutes = require("./routes/products.route");
 const cors = require("cors");
+const productRoutes = require("./routes/products.route");
 const authentication = require("./middleware/authentication");
-const BookRoutes = require("./routes/bookstore.route");
 const cartRoutes = require("./routes/cartproduct.route");
 const wishList = require("./routes/wishlist.route");
+const BlogRoutes = require("./routes/blog.route");
 require("dotenv").config(); // read env file
 
 const app = express();
@@ -24,7 +24,7 @@ app.post("/signup", async (req, res) => {
   const { password, email } = req.body;
   try {
     let user = await userModel.findOne({ email });
-    console.log(user);
+    // console.log(user);
     if (!user) {
       bcrypt.hash(password, 6, async function (err, hash) {
         const newuser = new userModel({ ...req.body, password: hash });
@@ -67,8 +67,8 @@ app.post("/login", async (req, res) => {
 // app.use('/admin', adminRoutes)
 app.use("/products", productRoutes);
 app.use("/cart", authentication, cartRoutes);
-app.use("/bookstore",  BookRoutes);
-app.use("/wishlist",authentication, wishList);
+app.use("/blog", BlogRoutes);
+app.use("/wishlist", authentication, wishList);
 // console.log(process.env.PORT)
 app.listen(process.env.PORT, async (req, res) => {
   try {

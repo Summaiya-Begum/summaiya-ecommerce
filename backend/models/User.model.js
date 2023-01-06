@@ -24,7 +24,15 @@ const UserSchema = new mongoose.Schema(
         quantity: { type: Number, default: 1 },
       },
     ],
-    wishlist: [{ type: String, required: true } ],
+    wishlist: [{ type: String, required: true }],
+    blogs: [
+      {
+        image: { type: String, required: true },
+        postedAt: { type: String, default: new Date().toLocaleDateString() },
+        title: { type: String, required: true },
+        description: { type: String, required: true },
+      },
+    ],
   },
   {
     versionKey: false,

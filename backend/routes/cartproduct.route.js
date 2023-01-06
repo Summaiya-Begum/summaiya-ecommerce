@@ -15,7 +15,7 @@ cartRoutes.patch("/edit/:id", async (req, res) => {
   const productId = req.params.id;
 
   const { userId, qty } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   const user = await userModel.findOne({ _id: userId });
   const cart = user.cartitems;
   const changeQuantity = cart.map((el, i) => {
@@ -47,7 +47,7 @@ cartRoutes.patch("/add/:id", async (req, res) => {
   const c = cart.map((el, i) => {
     return el.quantity;
   });
-  console.log(c);
+  // console.log(c);
   let y = cart.find((el) => {
     return el._id == productId;
   });
@@ -67,7 +67,7 @@ cartRoutes.patch("/add/:id", async (req, res) => {
 cartRoutes.delete("/delete/:id", async (req, res) => {
   const product_id = req.params.id;
   const { userId } = req.body;
-  console.log(product_id);
+  // console.log(product_id);
   try {
     await userModel.updateOne(
       { _id: userId },

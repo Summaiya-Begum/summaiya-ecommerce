@@ -22,7 +22,7 @@ productRoutes.get("/", async (req, res) => {
       .skip((page - 1) * limit)
       .limit(limit)
       .sort({ price: sort == "asc" ? 1 : -1 });
-    console.log(result);
+    // console.log(result);
     return await res.send({msg:"Data Fullfilled Success",data:result});
   }
 });

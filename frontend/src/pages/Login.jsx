@@ -21,13 +21,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect } from 'react';
 function Login() {
-    const {msg,isAuth} = useSelector((state) => state.user)
+    const { msg, isAuth } = useSelector((state) => state.user)
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch()
-    const navigate  = useNavigate()
+    const navigate = useNavigate()
     const [loginData, setLoginData] = useState({
         firstname: '',
-        lastname: '',
         email: '',
         password: ''
     })
@@ -35,15 +34,15 @@ function Login() {
         e.preventDefault()
         // console.log(loginData)
         dispatch(getLogin(loginData))
-        
+
     }
 
-    useEffect(()=>{
-        if(isAuth){
+    useEffect(() => {
+        if (isAuth) {
             alert(msg)
-           navigate('/') 
+            navigate('/')
         }
-    },[isAuth])
+    }, [isAuth])
 
 
     const handleChange = (e) => {
@@ -74,20 +73,12 @@ function Login() {
 
                     <form onSubmit={handleSubmit}>
                         <Stack spacing={4}>
-                            <HStack>
-                                <Box>
-                                    <FormControl id="firstName" isRequired>
-                                        <FormLabel>First Name</FormLabel>
-                                        <Input name="firstname" onChange={handleChange} type="text" />
-                                    </FormControl>
-                                </Box>
-                                <Box>
-                                    <FormControl id="lastName">
-                                        <FormLabel>Last Name</FormLabel>
-                                        <Input name="lastname" onChange={handleChange} type="text" />
-                                    </FormControl>
-                                </Box>
-                            </HStack>
+
+                            <FormControl id="firstName" isRequired>
+                                <FormLabel>First Name</FormLabel>
+                                <Input name="firstname" onChange={handleChange} type="text" />
+                            </FormControl>
+
                             <FormControl id="email" isRequired>
                                 <FormLabel>Email address</FormLabel>
                                 <Input name="email" onChange={handleChange} type="email" />
