@@ -145,14 +145,14 @@ const Cart = () => {
             >
               <Stack>
                 <Heading size={'lg'}>
-                  Cart  Items:  <span style={{ color: "#E80070" }}>{cartItems.length}</span>
+                  Cart  Items:  <span style={{ color: "#E80070" }}>{cartItems?.length}</span>
                 </Heading>
               </Stack>
             </VStack>
             {/* Passing data props */}
             {
-              cartItems.map((el, i) => {
-                // console.log(el)
+              cartItems?.map((el, i) => {
+                console.log(el)
                 return <PackageTier item={el} handlePlus={handlePlus} handleMinus={handleMinus} key={i} handledeleteitem={handledeleteitem} />
               })
             }

@@ -2,6 +2,7 @@ import * as types from "./wishlist.actionType";
 
 const init = {
   wishlistData: [],
+  user:{},
   msg: "",
   isLoading: false,
   isError: false,
@@ -21,6 +22,7 @@ export const wishlistReducer = (state = init, action) => {
         ...state,
         isLoading: false,
         wishlistData: payload.data.wishData,
+        user:payload.data.user,
         msg: payload.data.msg,
       };
     case types.WISHLIST_ERROR:

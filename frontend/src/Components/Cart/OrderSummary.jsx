@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 export default function OrderSummary() {
     const { cartItems} = useSelector(state => state.cart)
 const navigate = useNavigate()
-    const subtotal =  cartItems.reduce((acc,el,i)=>{
+    const subtotal =  cartItems?.reduce((acc,el,i)=>{
         return acc+= el.price*el.quantity
     },0)
 // console.log(subtotal)

@@ -24,7 +24,9 @@ import { FiLogIn } from 'react-icons/fi'
 import { BiLogOut } from 'react-icons/bi'
 import { Link } from "react-router-dom"
 function User() {
-    const { isAuth, token } = useSelector((state) => state.user)
+    const { isAuth, token } = useSelector((state) => state.user);
+    const user=useSelector(state=>state.wishlist.user);
+    console.log(user,"dkbos")
     console.log(isAuth)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -36,7 +38,7 @@ function User() {
         if (!isAuth) {
             navigate('/')
         }
-    }, [])
+    }, [user])
     return (
         <>
             <Box color={useColorModeValue('black', 'white')}>

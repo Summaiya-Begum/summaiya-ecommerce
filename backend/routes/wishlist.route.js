@@ -18,7 +18,7 @@ wishList.get("/", async (req, res) => {
   });
   console.log(data);
 
-  res.send({ msg: "Welcome WishList Home ", wishData: data });
+  res.send({ msg: "Welcome WishList Home ", wishData: data,user });
 });
 
 //  Edit Wishlist Product

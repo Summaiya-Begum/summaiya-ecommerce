@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as types from "./cart.actionType";
-const token = JSON.parse(localStorage.getItem("token"));
+const token = JSON.parse(localStorage.getItem("token"))||null;
 console.log(token);
 export const getCartItems = () => (dispatch) => {
   return fetch(`http://localhost:8081/cart`, {
@@ -12,7 +12,7 @@ export const getCartItems = () => (dispatch) => {
   })
     .then((res) => res.json())
     .then((res) => {
-      // console.log(res);
+      console.log(res);
       dispatch({ type: types.GET_CART_ITEMS, payload: res });
     });
 };
@@ -29,7 +29,8 @@ export const addCartItems=(id)=>(dispatch)=>{
     .then((res) => {
       // console.log(res);
       dispatch({ type: types.ADD_CART_ITEMS, payload: res });
-    });
+    })
+   
 };
 export const changeCartItems=(id,qty)=>(dispatch)=>{
   return fetch(`http://localhost:8081/cart/edit/${id}`, {

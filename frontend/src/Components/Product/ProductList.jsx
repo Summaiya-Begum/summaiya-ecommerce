@@ -3,7 +3,7 @@ import { Box, Stack, Image, Text, Heading, Button, Divider, VStack, SimpleGrid, 
 import { GiHearts } from "react-icons/gi"
 import { HiShoppingBag } from "react-icons/hi"
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { addCartItems } from '../../Redux/cart/cart.action'
 import { addData } from '../../Redux/wishlist/wishlist.action'
@@ -11,6 +11,7 @@ import { addData } from '../../Redux/wishlist/wishlist.action'
 const token = JSON.parse(localStorage.getItem("token"));
 
 function ProductList({ product }) {
+  const isAuth=useSelector(state=>state.user.isAuth)
   const [read, setRead] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()

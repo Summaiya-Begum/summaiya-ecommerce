@@ -62,6 +62,18 @@ app.post("/login", async (req, res) => {
     console.log(err);
   }
 });
+// app.get("/user",authentication,async(req,res)=>{
+  
+//   try{
+//     const { userId } = req.body;
+//   const user = await userModel.findOne({ _id: userId });
+//   // let cart = user.cartitems;
+//   res.send({ msg: "Product Added Successfull", user });
+//   }
+//   catch(err){
+//     res.send({msg:"fetching user error"})
+//   }
+// })
 
 //  Routers
 // app.use('/admin', adminRoutes)

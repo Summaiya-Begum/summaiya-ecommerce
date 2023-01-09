@@ -6,6 +6,7 @@ import BlogCard from '../Components/Blog/BlogCard'
 import Cart from '../Components/Cart/Cart'
 import Home from '../Components/Home'
 import ProductOfHome from '../Components/HomePage/ProductOfHome'
+import PrivateRoute from '../Components/PrivateRoute'
 import WishList from '../Components/WishList/WishList'
 import Login from './Login'
 import Signup from './Signup'
@@ -21,7 +22,11 @@ function AllRoutes() {
                 <Route path='/product' element={<ProductOfHome />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/login' element={<Login />} />
-                <Route path='/cart' element={<Cart />} />
+                <Route path='/cart' element={
+                    <PrivateRoute>
+                        <Cart />
+                    </PrivateRoute>
+                } />
                 <Route path='/blog' element={<Blog />} />
                 <Route path='/myblog' element={<BlogCard />} />
                 <Route path='/wishlist' element={<WishList />} />

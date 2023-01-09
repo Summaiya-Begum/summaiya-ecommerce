@@ -1,11 +1,11 @@
 import * as types from "./auth.actionType";
-let token = JSON.parse(localStorage.getItem("token"));
+let token = JSON.parse(localStorage.getItem("token")) || null;
 const initState = {
-  isAuth: false,
+  isAuth:token?true:false,
   isLoading: false,
   isError: false,
   user: {},
-  token: token || "",
+  token: token || null,
   msg: "",
 };
 
@@ -43,12 +43,14 @@ export const userReducer = (state = initState, action) => {
         ...state,
         isLoading: false,
         isAuth: true,
+        token:payload.token,
         user: payload.data,
         msg: payload.msg,
       };
     case types.LOGIN_FAILURE:
       return {
         isAuth: false,
+        token:null,
         isError: true,
       };
     case types.LOG_OUT:
@@ -57,7 +59,8 @@ export const userReducer = (state = initState, action) => {
         ...state,
         token: null,
         isAuth:false,
-        user:null
+        user:null,
+        msg:payload
       };
     default:
       return state;

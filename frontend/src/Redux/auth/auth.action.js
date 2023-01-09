@@ -31,5 +31,5 @@ export const getLogin = (payload) => (dispatch) => {
 
 
 export const userLogout = (payload) => (dispatch) => {
-  return dispatch({ type: types.LOG_OUT, payload: "LOGOUT SUCCESS" });
+  return dispatch({ type: types.LOG_OUT, payload: {msg:"LOGOUT SUCCESS" }});
 };

@@ -34,12 +34,16 @@ import { getCartItems } from '../Redux/cart/cart.action';
 export default function Navbar() {
   const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  const { cartItems, msg } = useSelector(state => state.cart)
+  const { cartItems, msg } = useSelector(state => state.cart);
+  const isAuth = useSelector(state => state.user.isAuth);
+ 
   const dispatch = useDispatch()
-  const btnRef = React.useRef()
+  const btnRef = React.useRef() 
   useEffect(() => {
+    if(isAuth)
     dispatch(getCartItems())
-  }, [msg, cartItems.length])
+    
+  }, [msg,isAuth,cartItems.length])
   return (
     <Box>
       <Flex
@@ -102,7 +106,6 @@ export default function Navbar() {
           {/* CART SECTION COMPONENT LINK */}
           <Link to={'/cart'}>
             <Button
-
               ref={btnRef} colorScheme='teal' onClick={onOpen}
               display={{ base: 'none', md: 'inline-flex' }}
               fontWeight={'bold'}
@@ -115,7 +118,7 @@ export default function Navbar() {
               }}>
               <BsCart3 position={'relative'} style={{ fontSize: "30px", marginRight: '-9px' }} _hover={{
                 color: "#E80070"
-              }} /><span style={{ marginTop: '-24px', }}  >{cartItems.length}</span>
+              }} /><span style={{ marginTop: '-24px', }}  >{isAuth?cartItems?.length:0}</span>
             </Button>
           </Link>
 
