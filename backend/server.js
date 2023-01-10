@@ -8,7 +8,6 @@ const productRoutes = require("./routes/products.route");
 const authentication = require("./middleware/authentication");
 const cartRoutes = require("./routes/cartproduct.route");
 const wishList = require("./routes/wishlist.route");
-const BlogRoutes = require("./routes/blog.route");
 require("dotenv").config(); // read env file
 
 const app = express();
@@ -62,24 +61,11 @@ app.post("/login", async (req, res) => {
     console.log(err);
   }
 });
-// app.get("/user",authentication,async(req,res)=>{
-  
-//   try{
-//     const { userId } = req.body;
-//   const user = await userModel.findOne({ _id: userId });
-//   // let cart = user.cartitems;
-//   res.send({ msg: "Product Added Successfull", user });
-//   }
-//   catch(err){
-//     res.send({msg:"fetching user error"})
-//   }
-// })
+
 
 //  Routers
-// app.use('/admin', adminRoutes)
 app.use("/products", productRoutes);
 app.use("/cart", authentication, cartRoutes);
-app.use("/blog", BlogRoutes);
 app.use("/wishlist", authentication, wishList);
 // console.log(process.env.PORT)
 app.listen(process.env.PORT, async (req, res) => {

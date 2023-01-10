@@ -25,14 +25,6 @@ const UserSchema = new mongoose.Schema(
       },
     ],
     wishlist: [{ type: String, required: true }],
-    blogs: [
-      {
-        image: { type: String, required: true },
-        postedAt: { type: String, default: new Date().toLocaleDateString() },
-        title: { type: String, required: true },
-        description: { type: String, required: true },
-      },
-    ],
   },
   {
     versionKey: false,
