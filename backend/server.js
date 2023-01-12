@@ -61,8 +61,12 @@ app.post("/login", async (req, res) => {
     console.log(err);
   }
 });
-
-
+app.get("/user",authentication, async (req, res) => {
+  const { userId } = req.body;
+  const user = await userModel.findOne({ _id: userId });
+  res.send({user})
+}
+);
 //  Routers
 app.use("/products", productRoutes);
 app.use("/cart", authentication, cartRoutes);
