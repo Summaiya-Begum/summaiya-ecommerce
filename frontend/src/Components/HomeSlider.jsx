@@ -25,16 +25,16 @@ const responsive = {
     }
 };
 const SlideData = [
-    { image: banner1 ,id:1},
-    { image: banner2 ,id:2},
-    { image: banner3 ,id:3},
-    { image: banner4 ,id:4},
-    { image: banner5 ,id:5},
-    { image: banner6 ,id:6},
+    { image: banner1, id: 1 },
+    { image: banner2, id: 2 },
+    { image: banner3, id: 3 },
+    { image: banner4, id: 4 },
+    { image: banner5, id: 5 },
+    { image: banner6, id: 6 },
 ];
 
 function HomeSlider() {
-    const [slides, setSlides] = useState(SlideData)
+
     return (
         <Carousel
             responsive={responsive}
@@ -44,20 +44,18 @@ function HomeSlider() {
             indicators={false}
             navButtonsAlwaysVisible={true}
             cycleNavigation={true}
+            showThumbs={false}
             navButtonsProps={{
                 style: {
                     background: "black",
                     color: "black",
                     borderRadius: 0,
                     height: "auto",
-                    border:'1px solid green'
                 }
             }}>
-            {slides?.map((slides, i) => {
+            {SlideData?.map((slides, i) => {
                 return (
-                    <>
-                        <Image  border={'1px solid green'} src={slides.image} alt="banner" key={slides.id} h={300} />
-                    </>
+                    <Image src={slides.image} alt="banner" key={slides.id.toString()} h={300} />
                 )
             })}
         </Carousel>

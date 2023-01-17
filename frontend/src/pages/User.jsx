@@ -23,7 +23,6 @@ import { Link } from "react-router-dom"
 function User() {
     const { isAuth, token } = useSelector((state) => state.user);
     const user = useSelector(state => state.user.user);
-    console.log(user, "dkbos")
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -53,10 +52,9 @@ function User() {
                                     src={<FaUserCircle color='white' />}
                                 />
                                 :
-                                // <Text>cygvy</Text>
-                                <Button textTransform={"uppercase"} w={10} borderRadius={"50%"} py={'1rem'} fontSize={20}       textAlign={'center'}>
+                                <Text textTransform={"uppercase"} w={10} borderRadius={"50%"} py={'0.4rem'} fontSize={20} textAlign={'center'}>
                                     {user && user.firstname[0]} {user && user.lastname[0]}
-                                </Button>
+                                </Text>
 
                         }
                     </MenuButton>
@@ -69,8 +67,7 @@ function User() {
                             />
                         </Center>
                         <br />
-                        <Center>
-                            {/* <Text textTransform={'uppercase'}>fhgfd</Text> */}
+                        <Center textTransform={'uppercase'}>
                             {isAuth ? user.firstname : ""} {isAuth ? user.lastname : ""}
                         </Center>
                         <br />

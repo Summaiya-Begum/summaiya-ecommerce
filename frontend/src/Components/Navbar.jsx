@@ -66,7 +66,7 @@ export default function Navbar() {
       >
         <Flex
           flex={{ base: 1, md: 'auto' }}
-          ml={{ base: -2 }}
+          ml={{ base: -3 }}
           display={{ base: 'flex', md: 'none' }}>
           <IconButton
             onClick={onToggle}
@@ -77,19 +77,18 @@ export default function Navbar() {
             aria-label={'Toggle Navigation'}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+        <Flex flex={{ base: 4 }} justify={{ base: 'start', md: 'start' ,sm:'start'}} >
           <Link to='/'>
-            <Text
-              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+            <Text 
+              textAlign={useBreakpointValue({ base: 'center', md: 'left' , sm:'right' })}
               fontFamily={'heading'}
-              fontSize={20}
+              fontSize={18}
               fontWeight={'bold'}
               color={useColorModeValue('white', 'white')} p={'0.5rem'}>
-              WalKart Ecommerce
+              <span style={{fontFamily:'Pacifico'}}>Summaiya Ecommerce</span> 
             </Text>
           </Link>
           <Flex display={{ base: 'none', md: 'flex' }} p={'0.5rem'} m={'auto'} fontWeight={'500'}
-          // border="1px solid red"
           >
             <DesktopNav />
           </Flex>
@@ -99,7 +98,7 @@ export default function Navbar() {
           flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
           direction={'row'}
-          spacing={6}>
+          spacing={0}>
           {/* Dark / Light Mode Button  */}
           <Button bg={'black'} onClick={toggleColorMode}
             _hover={{
@@ -114,7 +113,6 @@ export default function Navbar() {
           <Link to={'/cart'}>
             <Button
               ref={btnRef} colorScheme='teal' onClick={onOpen}
-              display={{ base: 'none', md: 'inline-flex' }}
               fontWeight={'bold'}
               color={'white'}
               bg={'black'}
@@ -238,9 +236,9 @@ const MobileNavItem = ({ label, children, href }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Stack spacing={4} onClick={children && onToggle}>
+    <Stack spacing={2} onClick={children && onToggle}>
       <Flex
-        py={2}
+        py={1}
         as={Link}
         to={href}
         justify={'space-between'}

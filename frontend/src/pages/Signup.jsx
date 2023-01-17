@@ -24,8 +24,6 @@ import { getSignup } from '../Redux/auth/auth.action';
 function Signup() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const msg = useSelector((state) => state.user.msg)
-    console.log(msg)
     const [showPassword, setShowPassword] = useState(false);
     const [signupData, setSignupData] = useState({
         firstname: '',
@@ -39,10 +37,8 @@ function Signup() {
         e.preventDefault()
         // console.log(signupData)
         dispatch(getSignup(signupData))
-        if (msg) {
-            alert(msg)
+            alert("SignUp Successfull")
             navigate('/login')
-        }
     }
     const handleChange = (e) => {
         const { value, name } = e.target

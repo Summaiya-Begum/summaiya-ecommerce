@@ -16,29 +16,30 @@ function Pagination() {
         // console.log(el, i)
         return (
 
-                <Button
-                    bg='#E80070'
-                    color={'black'}
-                    fontWeight={'bold'}
-                    p={'0rem 1rem'}
-                    _hover={{
-                        bg: "black",
-                        color:"white"
-                    }}
-                    onClick={() => (dispatch(changePageProduct(i + 1)))}
-                    disabled={state.page === i + 1}>
-                    {i + 1}
-                </Button>
+            <Button
+                key={i}
+                bg='#E80070'
+                color={'black'}
+                fontWeight={'bold'}
+                p={'0rem 1rem'}
+                _hover={{
+                    bg: "black",
+                    color: "white"
+                }}
+                onClick={() => (dispatch(changePageProduct(i + 1)))}
+                disabled={state.page === i + 1}>
+                {i + 1}
+            </Button>
 
 
         )
 
     })
     return (
-        <Box 
-        whiteSpace={5}
-        boxShadow={'2xl'}
-        p={'2rem'}>{pagination}</Box>
+        <Box
+            whiteSpace={5}
+            boxShadow={'2xl'}
+            p={'2rem'}>{pagination}</Box>
     )
 }
 

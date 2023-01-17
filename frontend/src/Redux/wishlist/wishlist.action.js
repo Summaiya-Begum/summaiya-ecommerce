@@ -37,7 +37,7 @@ export const addData = (id,payload) => (dispatch) => {
   )
     .then((res) => res.json())
     .then((res) => {
-      console.log(res.msg);
+      // console.log(res.msg);
       alert(res.msg);
       dispatch({ type: types.PATCH_WISHLIST_SUCCESS, payload: res.data });
     })

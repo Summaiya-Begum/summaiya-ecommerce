@@ -31,7 +31,7 @@ export const getLogin = (payload) => (dispatch) => {
   axios
     .post(`https://summaiya-walkart-api.onrender.com/login`, payload)
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       dispatch({ type: types.LOGIN_SUCCESS, payload: res.data });
       getUser(res.data.token,dispatch)
     })
