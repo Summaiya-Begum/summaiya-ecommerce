@@ -21,9 +21,9 @@ export const wishlistReducer = (state = init, action) => {
       return {
         ...state,
         isLoading: false,
-        wishlistData: payload.data.wishData,
-        user:payload.data.user,
-        msg: payload.data.msg,
+        wishlistData: payload.wishData,
+        user:payload.user,
+        msg: payload.msg,
       };
     case types.WISHLIST_ERROR:
       return {

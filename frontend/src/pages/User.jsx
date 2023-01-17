@@ -9,15 +9,12 @@ import {
     MenuList,
     MenuItem,
     MenuDivider,
-    useDisclosure,
     useColorModeValue,
-    Stack,
-    useColorMode,
     Center,
     Text,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userLogout } from '../Redux/auth/auth.action';
+import { userLogout, getUser } from '../Redux/auth/auth.action';
 import { useNavigate } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa'
 import { FiLogIn } from 'react-icons/fi'
@@ -25,20 +22,15 @@ import { BiLogOut } from 'react-icons/bi'
 import { Link } from "react-router-dom"
 function User() {
     const { isAuth, token } = useSelector((state) => state.user);
-    const user=useSelector(state=>state.wishlist.user);
-    console.log(user,"dkbos")
-    console.log(isAuth)
+    const user = useSelector(state => state.user.user);
+    console.log(user, "dkbos")
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleLogout = () => {
         dispatch(userLogout())
     }
-    useEffect(() => {
-        if (!isAuth) {
-            navigate('/')
-        }
-    }, [user])
+
     return (
         <>
             <Box color={useColorModeValue('black', 'white')}>
@@ -52,8 +44,7 @@ function User() {
                         cursor={'pointer'}
                         minW={0}
                         bg={useColorModeValue('white', 'gray.900')}
-                        color={useColorModeValue('white', 'white')}
-
+                        color={useColorModeValue('black', 'white')}
                     >
                         {
                             !isAuth ?
@@ -62,28 +53,29 @@ function User() {
                                     src={<FaUserCircle color='white' />}
                                 />
                                 :
-                                <Avatar
-                                    size={'sm'}
-                                    src={'https://avatars.githubusercontent.com/u/103142498?v=4'}
-                                />
+                                // <Text>cygvy</Text>
+                                <Button textTransform={"uppercase"} w={10} borderRadius={"50%"} py={'1rem'} fontSize={20}       textAlign={'center'}>
+                                    {user && user.firstname[0]} {user && user.lastname[0]}
+                                </Button>
+
                         }
                     </MenuButton>
                     <MenuList alignItems={'center'}>
                         <br />
                         <Center>
                             <Avatar
-                                size={'2xl'}
-                                src={'https://avatars.githubusercontent.com/u/103142498?v=4'}
+                                size={'xl'}
+                                src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0XmmVnMfky_5fsWIgguEgDW_v5D3znnJbqw&usqp=CAU'}
                             />
                         </Center>
                         <br />
                         <Center>
-                            <p>Username</p>
+                            {/* <Text textTransform={'uppercase'}>fhgfd</Text> */}
+                            {isAuth ? user.firstname : ""} {isAuth ? user.lastname : ""}
                         </Center>
                         <br />
                         <MenuDivider />
                         <Link to={'/wishlist'}><MenuItem>Your WishList</MenuItem></Link>
-                        <MenuItem>Your Servers</MenuItem>
                         <MenuItem>Account Settings</MenuItem>
                         {
                             !isAuth ?
@@ -102,7 +94,6 @@ function User() {
                                         <Text>Logout</Text>
                                         <Text><BiLogOut size={20} /></Text>
                                     </Flex>
-
                                 </MenuItem>)
                         }
                     </MenuList>

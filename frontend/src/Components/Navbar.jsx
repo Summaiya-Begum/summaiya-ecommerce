@@ -31,19 +31,26 @@ import { BsCart3 } from "react-icons/bs"
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react';
 import { getCartItems } from '../Redux/cart/cart.action';
+import { getData } from "../Redux/wishlist/wishlist.action";
+import { getUser } from "../Redux/auth/auth.action";
 export default function Navbar() {
   const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const { cartItems, msg } = useSelector(state => state.cart);
-  const isAuth = useSelector(state => state.user.isAuth);
- 
+  const { isAuth, token } = useSelector(state => state.user);
+  const { wishlistData } = useSelector(state => state.wishlist)
+  const msg2 = useSelector((state) => state.wishlist.msg)
   const dispatch = useDispatch()
-  const btnRef = React.useRef() 
+  const btnRef = React.useRef()
+  
   useEffect(() => {
-    if(isAuth)
-    dispatch(getCartItems())
-    
-  }, [msg,isAuth,cartItems.length])
+    if (isAuth) {
+      dispatch(getCartItems(token))
+      dispatch(getData(token));
+      dispatch(getUser(token))
+    }
+  }, [msg, msg2]);
+
   return (
     <Box>
       <Flex
@@ -118,7 +125,7 @@ export default function Navbar() {
               }}>
               <BsCart3 position={'relative'} style={{ fontSize: "30px", marginRight: '-9px' }} _hover={{
                 color: "#E80070"
-              }} /><span style={{ marginTop: '-24px', }}  >{isAuth?cartItems?.length:0}</span>
+              }} /><span style={{ marginTop: '-24px', color: "orange" }}  >{isAuth ? cartItems?.length : 0}</span>
             </Button>
           </Link>
 
@@ -286,7 +293,7 @@ const NAV_ITEMS = [
       {
         label: 'Random Product',
         subLabel: 'Trending Design to inspire you',
-        href: '/product',
+        href: '#',
       },
       {
         label: 'Beauty Products',
@@ -296,7 +303,7 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: 'Find Work',
+    label: 'Accessories',
     children: [
       {
         label: 'Job Board',
@@ -310,14 +317,7 @@ const NAV_ITEMS = [
       },
     ],
   },
-  {
-    label: 'Add Blog',
-    href: '/blog',
-  },
-  {
-    label: 'My Blog',
-    href: 'myblog',
-  },
+
 ];
 
 

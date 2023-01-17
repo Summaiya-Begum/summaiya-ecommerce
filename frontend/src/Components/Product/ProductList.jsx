@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Stack, Image, Text, Heading, Button, Divider, VStack, SimpleGrid, Grid, useColorModeValue } from '@chakra-ui/react'
+import { Box, Stack, Image, Text, Button, VStack, SimpleGrid, Grid, useColorModeValue } from '@chakra-ui/react'
 import { GiHearts } from "react-icons/gi"
 import { HiShoppingBag } from "react-icons/hi"
 import { useState } from 'react'
@@ -8,10 +8,8 @@ import { useNavigate } from 'react-router-dom'
 import { addCartItems } from '../../Redux/cart/cart.action'
 import { addData } from '../../Redux/wishlist/wishlist.action'
 
-const token = JSON.parse(localStorage.getItem("token"));
-
 function ProductList({ product }) {
-  const isAuth=useSelector(state=>state.user.isAuth)
+  const { isAuth, token } = useSelector(state => state.user)
   const [read, setRead] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -19,26 +17,20 @@ function ProductList({ product }) {
     setRead(prev => !prev)
   }
 
-
-  const handleCart = (id) => {
-    // fetch(`http://localhost:8081/cart/edit/${id}`, {
-    //   method: "PATCH",
-    //   headers: { "Content-Type": "application/json", "authorization": `Bearer ${token}` }
-    // })
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     console.log(res);
-    //     dispatch(getCartItems())
-    //   })
-
-    // // dispatch(patchProductCart(id))
-    // // navigate('/cart')
-    // console.log(id)
-    dispatch(addCartItems(id))
+  const handleCart = (id, token) => {
+    if (!isAuth) {
+      alert("Please Login Account");
+      navigate("/login")
+    }
+    else dispatch(addCartItems(id, token))
   }
-
-
-
+  const handleWish = (id, token) => {
+    if (!isAuth) {
+      alert("Please Login Account");
+      navigate("/login")
+    }
+    else dispatch(addData(id, token))
+  }
 
   return (
     <Box height={'auto'} boxShadow='2xl' p='2' rounded='md' bg='white'>
@@ -111,9 +103,7 @@ function ProductList({ product }) {
                   _hover={{
                     bg: 'black',
                   }}
-
-                  onClick={() => dispatch(addData(product._id))}
-
+                  onClick={() => handleWish(product._id, token)}
                 >
                   <GiHearts size={30} color='white' />
                 </Button>
@@ -127,7 +117,7 @@ function ProductList({ product }) {
                   _hover={{
                     bg: "black"
                   }}
-                  onClick={() => handleCart(product._id)}
+                  onClick={() => handleCart(product._id, token)}
                 >
                   <HiShoppingBag size={30} color='white' />
                 </Button>

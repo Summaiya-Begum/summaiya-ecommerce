@@ -1,13 +1,12 @@
 import axios from "axios";
 import * as types from "./cart.actionType";
-const token = JSON.parse(localStorage.getItem("token"))||null;
-console.log(token);
-export const getCartItems = () => (dispatch) => {
-  return fetch(`http://localhost:8081/cart`, {
+
+export const getCartItems = (payload) => (dispatch) => {
+  return fetch(`https://summaiya-walkart-api.onrender.com/cart`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${payload}`,
     },
   })
     .then((res) => res.json())
@@ -17,23 +16,24 @@ export const getCartItems = () => (dispatch) => {
     });
 };
 
-export const addCartItems=(id)=>(dispatch)=>{
-  return fetch(`http://localhost:8081/cart/add/${id}`, {
+export const addCartItems=(id,payload)=>(dispatch)=>{
+  return fetch(`https://summaiya-walkart-api.onrender.com/cart/add/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${payload}`,
     },
   })
     .then((res) => res.json())
     .then((res) => {
       // console.log(res);
       dispatch({ type: types.ADD_CART_ITEMS, payload: res });
+      alert(res.msg)
     })
    
 };
 export const changeCartItems=(id,qty)=>(dispatch)=>{
-  return fetch(`http://localhost:8081/cart/edit/${id}`, {
+  return fetch(`https://summaiya-walkart-api.onrender.com/cart/edit/${id}`, {
     method: "PATCH",
     body:JSON.stringify({qty}),
     headers: {
@@ -50,15 +50,15 @@ export const changeCartItems=(id,qty)=>(dispatch)=>{
 
 // Delete Cart Item 
 
-export const dltCartItem  = (id) => (dispatch) =>{
-  axios.delete(`http://localhost:8081/cart/delete/${id}`,{
+export const dltCartItem  = (id,payload) => (dispatch) =>{
+  axios.delete(`https://summaiya-walkart-api.onrender.com/cart/delete/${id}`,{
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${payload}`,
   },
   })
   // .then((res)=>console.log(res.data))
-  .then((res)=>dispatch({type:types.REMOVE_CART_ITEMS, payload:res}))
+  .then((res)=>dispatch({type:types.REMOVE_CART_ITEMS, payload:res},alert(res.data.msg)))
   .catch((err)=>console.log(err))
 
 }

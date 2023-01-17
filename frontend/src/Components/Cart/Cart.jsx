@@ -28,13 +28,27 @@ import { changeCartItems, dltCartItem } from '../../Redux/cart/cart.action';
 
 
 export const PackageTier = ({ item, handlePlus, handleMinus, handledeleteitem }) => {
+  const { isAuth, token } = useSelector((state) => state.user)
 
   return (
     <>
-      <Stack spacing="10" width="full" textAlign={'start'} direction={{ base: 'column', md: 'row' }}>
+      <Stack py={{
+        lg: '5rem',
+        md: '0.5rem',
+        sm: "2rem"
+      }}
+        px={{
+          lg: '1rem',
+          md: '0.5rem',
+          sm: "2rem"
+        }}
+        spacing="10" width={{ lg: "full", md: "100%" }}
+        textAlign={'start'}
+        direction={{ base: 'column', md: 'row' }}
+        boxShadow='2xl'>
         <Image
           rounded="lg"
-          width="150px"
+          width={{ lg: "150px", md: "150px", sm: "100%" }}
           height="150px"
           fit="cover"
           src={item.category.image}
@@ -60,11 +74,11 @@ export const PackageTier = ({ item, handlePlus, handleMinus, handledeleteitem })
           </HStack>
         </Box>
         <Box display='flex' alignItems='center' justifyContent={'center'} gap={2}>
-          <Button onClick={() => handlePlus(item._id)}>+</Button>
+          <Button onClick={() => handlePlus(item._id, token)}>+</Button>
           <Box as='span'>
             {item.quantity}
           </Box>
-          <Button disabled={item.quantity == 1} onClick={() => handleMinus(item._id)}>-</Button>
+          <Button disabled={item.quantity == 1} onClick={() => handleMinus(item._id, token)}>-</Button>
         </Box>
         <Stack justifyContent={'center'} textAlign={'center'}>
           <Heading size={'1xl'}>₹{item.price * item.quantity}</Heading>
@@ -74,7 +88,7 @@ export const PackageTier = ({ item, handlePlus, handleMinus, handledeleteitem })
             size="md"
             color={useColorModeValue('black', 'white')}
             bg={useColorModeValue('white', 'gray.800')}
-            onClick={() => handledeleteitem(item._id)}
+            onClick={() => handledeleteitem(item._id, token)}
           >
             <CloseIcon />
           </Button>
@@ -87,18 +101,18 @@ export const PackageTier = ({ item, handlePlus, handleMinus, handledeleteitem })
 const Cart = () => {
   const dispatch = useDispatch()
   const { cartItems } = useSelector(state => state.cart)
+  const { token } = useSelector(state => state.user)
 
 
-
-  const handleMinus = (id) => {
+  const handleMinus = (id, token) => {
     dispatch(changeCartItems(id, "minus"))
   }
-  const handlePlus = (id) => {
+  const handlePlus = (id, token) => {
     dispatch(changeCartItems(id, "plus"))
   }
 
-  const handledeleteitem = (id) => {
-    dispatch(dltCartItem(id))
+  const handledeleteitem = (id, token) => {
+    dispatch(dltCartItem(id,token))
   }
 
 
@@ -106,14 +120,15 @@ const Cart = () => {
   return (
     <>
       <Flex
-        // border={'2px solid orange'}
+        // border={'2px solid red'}
         py={{
           lg: '5rem',
-          md: '2rem'
+          md: '5rem',
         }}
         px={{
           lg: '1rem',
-          md: '2rem'
+          md: '5rem',
+          sm: "1rem"
         }}
         justifyContent={{
           base: 'flex-start',
@@ -122,7 +137,9 @@ const Cart = () => {
         }}
         direction={{
           base: 'column',
-          md: 'row',
+          lg: 'row',
+          md: 'column',
+          sm: 'column',
         }}
         gap={15}
         m={'auto'}
@@ -143,7 +160,7 @@ const Cart = () => {
               }}
               alignItems={'start'}
             >
-              <Stack>
+              <Stack  >
                 <Heading size={'lg'}>
                   Cart  Items:  <span style={{ color: "#E80070" }}>{cartItems?.length}</span>
                 </Heading>
@@ -160,7 +177,7 @@ const Cart = () => {
           <Divider />
         </SimpleGrid>
 
-        <Flex direction="column" align="end" flex="1"  >
+        <Flex direction="column" align={{ lg: "end", md: 'center', sm: 'center' }} flex="1"  >
           <OrderSummary />
           <HStack fontWeight="semibold">
             <p>or</p>

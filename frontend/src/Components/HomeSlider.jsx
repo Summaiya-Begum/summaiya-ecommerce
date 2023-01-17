@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { Image } from "@chakra-ui/react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import banner1 from "../../assest/banner1.jpg"
-import banner2 from "../../assest/banner2.jpg"
-import banner3 from "../../assest/banner3.jpg"
-import banner4 from "../../assest/banner4.jpg"
-import banner5 from "../../assest/banner5.jpg"
-import banner6 from "../../assest/banner6.jpg"
+import banner1 from "../assest/banner1.jpg"
+import banner2 from "../assest/banner2.jpg"
+import banner3 from "../assest/banner3.jpg"
+import banner4 from "../assest/banner4.jpg"
+import banner5 from "../assest/banner5.jpg"
+import banner6 from "../assest/banner6.jpg"
 
 const responsive = {
     desktop: {
@@ -25,19 +25,18 @@ const responsive = {
     }
 };
 const SlideData = [
-    { image: banner1 },
-    { image: banner2 },
-    { image: banner3 },
-    { image: banner4 },
-    { image: banner5 },
-    { image: banner6 },
+    { image: banner1 ,id:1},
+    { image: banner2 ,id:2},
+    { image: banner3 ,id:3},
+    { image: banner4 ,id:4},
+    { image: banner5 ,id:5},
+    { image: banner6 ,id:6},
 ];
 
 function HomeSlider() {
     const [slides, setSlides] = useState(SlideData)
     return (
         <Carousel
-      
             responsive={responsive}
             className="carasousel"
             autoPlay={true}
@@ -54,10 +53,10 @@ function HomeSlider() {
                     border:'1px solid green'
                 }
             }}>
-            {slides.map((slides, i) => {
+            {slides?.map((slides, i) => {
                 return (
                     <>
-                        <Image  border={'1px solid green'} src={slides.image} alt="banner" key={i} h={300} />
+                        <Image  border={'1px solid green'} src={slides.image} alt="banner" key={slides.id} h={300} />
                     </>
                 )
             })}

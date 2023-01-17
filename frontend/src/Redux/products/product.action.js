@@ -21,7 +21,7 @@ export const fetchProduct =
     return (
       axios
         .get(
-          `http://localhost:8081/products`,{ params:payload }
+          `https://summaiya-walkart-api.onrender.com/products`,{ params:payload }
         )
         // .then((res)=>console.log(res.data))
         .then((res) => dispatch(getProduct(res.data)))

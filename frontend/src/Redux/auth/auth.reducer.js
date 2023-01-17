@@ -1,10 +1,10 @@
 import * as types from "./auth.actionType";
 let token = JSON.parse(localStorage.getItem("token")) || null;
 const initState = {
-  isAuth:token?true:false,
+  isAuth: token ? true : false,
   isLoading: false,
   isError: false,
-  user: {},
+  user: {firstname:"x",lastname:"y"},
   token: token || null,
   msg: "",
 };
@@ -28,6 +28,7 @@ export const userReducer = (state = initState, action) => {
       };
     case types.SIGNUP_FAILURE:
       return {
+        ...state,
         isError: true,
         isLoading: false,
         msg: payload,
@@ -43,24 +44,25 @@ export const userReducer = (state = initState, action) => {
         ...state,
         isLoading: false,
         isAuth: true,
-        token:payload.token,
-        user: payload.data,
+        token: payload.token,
         msg: payload.msg,
       };
     case types.LOGIN_FAILURE:
       return {
+        ...state,
         isAuth: false,
-        token:null,
+        token: null,
         isError: true,
       };
+    case types.GET_USER:
+      return { ...state, user: payload };
     case types.LOG_OUT:
       localStorage.removeItem("token");
       return {
         ...state,
         token: null,
-        isAuth:false,
-        user:null,
-        msg:payload
+        isAuth: false,
+        msg: payload,
       };
     default:
       return state;

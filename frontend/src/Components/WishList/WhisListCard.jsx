@@ -3,7 +3,6 @@ import {
   Circle,
   Box,
   Image,
-  Badge,
   useColorModeValue,
   Icon,
   chakra,
@@ -52,13 +51,10 @@ function Rating({ rating, numReviews }) {
 }
 
 function WhisListCard({ item }) {
+  const { token } = useSelector(state => state.user)
   const dispatch = useDispatch()
-  const {msg} = useSelector((state)=>state.wishlist)
-  
 
-  
   return (
-
     <Flex p={5} w="full" alignItems="center" justifyContent="center">
       <Box
         bg={useColorModeValue('white', 'gray.800')}
@@ -112,7 +108,7 @@ function WhisListCard({ item }) {
               color={'gray.800'}
               fontSize={'1.2em'}>
               <chakra.a display={'flex'}>
-                <Icon onClick={() => dispatch(deleteData(item._id))} as={FiDelete} h={7} w={7} alignSelf={'center'} />
+                <Icon onClick={() => dispatch(deleteData(item._id, token))} as={FiDelete} h={7} w={7} alignSelf={'center'} />
               </chakra.a>
             </Tooltip>
           </Flex>

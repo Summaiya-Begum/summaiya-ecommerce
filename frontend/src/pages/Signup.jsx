@@ -21,16 +21,12 @@ import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from "react-redux"
 import { getSignup } from '../Redux/auth/auth.action';
-import { useEffect } from 'react';
-import { validEmail, validPassword } from '../RegEx';
 function Signup() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const msg = useSelector((state) => state.user.msg)
     console.log(msg)
     const [showPassword, setShowPassword] = useState(false);
-    const [emailErr, setEmailErr] = useState(false);
-    const [pwdError, setPwdError] = useState(false);
     const [signupData, setSignupData] = useState({
         firstname: '',
         lastname: "",
@@ -39,33 +35,17 @@ function Signup() {
         phonenumber: "",
         gender: "male"
     })
-
     const handleSubmit = (e) => {
-      
         e.preventDefault()
-        console.log(signupData)
+        // console.log(signupData)
         dispatch(getSignup(signupData))
-         if (msg) {
+        if (msg) {
             alert(msg)
-            // navigate('/login')
+            navigate('/login')
         }
     }
-
-
-
-
-
     const handleChange = (e) => {
         const { value, name } = e.target
-
-        // if(!validEmail.test({[name.email]:value})){
-        //     setEmailErr(true)
-        // }
-        // if(!validPassword.test({[name.password]:value})){
-        //     setPwdError(true)
-        // }
-        
-
         setSignupData({
             ...signupData,
             [name]: value,
@@ -96,7 +76,7 @@ function Signup() {
                                     <FormControl id="firstName" isRequired>
                                         <FormLabel>First Name</FormLabel>
                                         <Input name="firstname" value={signupData.firstname} onChange={handleChange} type="text" />
-                                       
+
                                     </FormControl>
                                 </Box>
                                 <Box>
@@ -150,7 +130,6 @@ function Signup() {
                                         bg: 'pink.500',
                                     }}
                                     type="submit"
-
                                 >
                                     Sign up
                                 </Button>

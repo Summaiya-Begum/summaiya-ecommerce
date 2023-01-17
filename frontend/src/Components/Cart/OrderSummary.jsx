@@ -28,12 +28,12 @@ const handleProceed=()=>{
     navigate('/payment')
 }
     return (
-        <Box p={'0.5rem'} >
+        <Box p={{lg:'0.5rem', md:'2rem'}}>
             <VStack spacing={1} textAlign="center">
                 <Heading as="h1" fontSize="4xl">
                     Order Summary
                 </Heading>
-                <Text fontSize="lg" color={'gray.500'}>
+                <Text fontSize="lg" color={'gray.500'}p={{lg:'2rem', md:'2rem',sm:'2rem'}}>
                     Start with 14-day free trial. No credit card needed.
                 </Text>
             </VStack>
@@ -42,7 +42,7 @@ const handleProceed=()=>{
                 textAlign="center"
                 justify="center"
                 spacing={{ base: 4, lg: 5 }}
-                py={12}>
+              >
                 <Box position="relative" boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}>
                     <Box
                         position="absolute"
@@ -61,11 +61,11 @@ const handleProceed=()=>{
                             Order Summary
                         </Text>
                     </Box>
-                    <Box boxSize={["sm",]} h={60} py={8} px={5}
+                    <Box boxSize={["sm",]} h={{lg:60}} py={8} px={5}
                         width={{
                             base: '100%',
                             lg: '350px',
-                            md: '40%',
+                            md: '500px',
                         }}
                     >
                         <HStack justifyContent="space-between" py={5}>
@@ -91,17 +91,14 @@ const handleProceed=()=>{
                             <Text fontSize="1xl" color="#E80070">
                                 Total
                             </Text>
-
                             <Text fontSize="1xl" fontWeight="500">
                             ₹ {(discount).toFixed(2)}
                             </Text>
-
                         </HStack>
                     </Box>
                     <VStack
                         bg={useColorModeValue('gray.50', 'gray.700')}
-                        py={5}
-                        borderBottomRadius={'xl'}>
+                        borderBottomRadius={'xl'} p={{lg:'0.5rem', md:'3rem',sm:'1rem'}}>
                         <Box w="80%" >
                             <Button onClick={handleProceed} colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
                                 Checkout

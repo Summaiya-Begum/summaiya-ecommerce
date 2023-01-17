@@ -16,12 +16,14 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { getLogin } from '../Redux/auth/auth.action';
+import { getLogin, getUser } from '../Redux/auth/auth.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect } from 'react';
+import { getCartItems } from '../Redux/cart/cart.action';
+import { getData } from '../Redux/wishlist/wishlist.action';
 function Login() {
-    const { msg, isAuth } = useSelector((state) => state.user)
+    const { msg, isAuth, token } = useSelector((state) => state.user)
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -36,22 +38,21 @@ function Login() {
         dispatch(getLogin(loginData))
 
     }
-
+    const handleChange = (e) => {
+        const { value, name } = e.target
+        // console.log(e.target.value);
+        setLoginData({ ...loginData, [name]: value })
+    }
     useEffect(() => {
         if (isAuth) {
             alert(msg)
+            dispatch(getUser(token))
+            dispatch(getCartItems(token))
+            dispatch(getData(token))
             navigate('/')
         }
     }, [isAuth])
 
-
-    const handleChange = (e) => {
-        const { value, name } = e.target
-        console.log(e.target.value);
-        setLoginData({ ...loginData, [name]: value })
-    }
-
-    console.log(loginData)
 
     return (
         <Flex
