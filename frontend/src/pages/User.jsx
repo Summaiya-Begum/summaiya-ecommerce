@@ -76,15 +76,17 @@ function User() {
                         <MenuItem>Account Settings</MenuItem>
                         {
                             !isAuth ?
-                                (<MenuItem>
+                                (
                                     <Link to='/signup'>
-                                        <Flex alignItems={'center'} gap={2}>
-                                            <Text>SignUp</Text>
-                                            <Text><FiLogIn size={20} /></Text>
-                                        </Flex>
+                                        <MenuItem>
+                                            <Flex alignItems={'center'} gap={2}>
+                                                <Text>SignUp</Text>
+                                                <Text><FiLogIn size={20} /></Text>
+                                            </Flex>
+                                        </MenuItem>
                                     </Link>
 
-                                </MenuItem>)
+                                )
                                 :
                                 (<MenuItem onClick={handleLogout}>
                                     <Flex alignItems={'center'} gap={2}>

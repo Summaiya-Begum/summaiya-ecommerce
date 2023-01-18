@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as types from "./cart.actionType";
-const token = JSON.parse(localStorage.getItem("token"));
+const token = JSON.parse(localStorage.getItem("token")) || '';
 export const getCartItems = (payload) => (dispatch) => {
   return fetch(`https://summaiya-walkart-api.onrender.com/cart`, {
     method: "GET",
