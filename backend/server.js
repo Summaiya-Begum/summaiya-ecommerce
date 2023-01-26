@@ -46,7 +46,6 @@ app.post("/login", async (req, res) => {
   try {
     const hash = await userModel.findOne({ email });
     //  res.send(JSON.stringify(hash.password))
-
     bcrypt.compare(password, hash.password, function (err, result) {
       // res.send(result)
       if (result) {
