@@ -4,7 +4,7 @@ const initState = {
   isAuth: token ? true : false,
   isLoading: false,
   isError: false,
-  user: {firstname:"x",lastname:"y"},
+  user: {firstname:"S",lastname:"B"},
   token: token || null,
   msg: "",
 };

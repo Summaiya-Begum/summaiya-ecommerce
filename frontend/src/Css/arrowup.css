@@ -1,15 +1,18 @@
-.arrow-up {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 50%;
-    margin-left: auto;
-    background: #E80070;
-    position: sticky;
-    bottom: 20px;
-    right: 20px;
-  }
-  
+.backToTop {
+  bottom: 25px;
+  right: 25px;
+  position: fixed;
+  font-size: 130px;
+  color: #ffffff;
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem;
+  background: #E80070;
+  box-shadow: rgba(192, 61, 161, 0.811) 0px 0px 4px 2px, rgba(255, 0, 187, 0.735) 2px 2px 5px 0px
+}
+
+.backToTop:hover {
+  background: #E80070;
+  color: #000;
+  box-shadow: rgba(192, 61, 161, 0.811) 0px 0px 4px 2px, rgba(255, 0, 187, 0.735) 2px 2px 5px 0px
+}

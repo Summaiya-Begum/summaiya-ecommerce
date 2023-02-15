@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../Redux/products/product.action';
 import ProductList from './ProductList';
-import { Box, SimpleGrid,Spinner } from '@chakra-ui/react'
+import { Box, SimpleGrid, Spinner, Text, CircularProgress, Center } from '@chakra-ui/react'
 import Functionality from './Functionality';
 import Pagination from './Pagination';
 import ArrowUp from '../ArrowUp';
@@ -21,8 +21,11 @@ function Product() {
     <>
 
       <Box >
-        {isLoading ? <Spinner  thickness='4px'
-  speed='0.65s' size='xl' />:
+        {isLoading ? <Box height={'60vh'} textAlign={'center'} alignContent={'center'} padding={'6rem'} >
+          <CircularProgress value={30} size='120px' thickness='5px' isIndeterminate color='#E80070' margin={'auto'} />
+          <Text fontFamily={'cursive'} fontWeight={'bold'} fontSize={'25px'} as="span"> Loading Data...</Text>
+
+        </Box> :
           <Box>
             <Functionality />
             <SimpleGrid columns={[1, 2, 3, 4]} borderRadius={'3xl'}
@@ -33,12 +36,14 @@ function Product() {
               })
               }
             </SimpleGrid>
+            <Box>
+              <Pagination />
+            </Box>
           </Box>
+
         }
       </Box>
-      <Box>
-        <Pagination />
-      </Box>
+
       <ArrowUp />
     </>
 

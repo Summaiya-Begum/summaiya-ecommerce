@@ -1,35 +1,34 @@
 import React from "react";
-import "../Css/arrowup.css";
-import { useState } from "react";
+import "../Css/arrowup.css"
 import { FaAngleUp } from "react-icons/fa";
-
-export default function ArrowUp() {
-  const [visible, setVisible] = useState(false);
-  const toggleVisible = () => {
-    const scrolled = document.documentElement.scrollTop;
-    if (scrolled > 100) {
-      setVisible(true);
-    } else if (scrolled <= 100) {
-      setVisible(false);
-    }
-  };
-
-  const scrollToTop = () => {
+import { Button } from "@chakra-ui/button";
+const ArrowUp = () => {
+  const [scrollTop, setScrollTop] = React.useState(false);
+  React.useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 100) {
+        setScrollTop(true);
+      } else {
+        setScrollTop(false);
+      }
+    });
+  }, []);
+  const bottomToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
-
-  window.addEventListener("scroll", toggleVisible);
-
-  const Arrowup = () => (
-    <div style={{ display: visible ? "inline" : "none" }}>
-      <div className="arrow-up">
-        <FaAngleUp onClick={scrollToTop} size={20} color={"black"} cursor={"pointer"} />
-      </div>
-    </div>
+  return (
+    <>
+      {scrollTop && (
+        <button onClick={bottomToTop} className="backToTop" >
+          <FaAngleUp size={20} cursor={"pointer"} _hover={{
+            color: "black" 
+          }} />
+        </button>
+      )}
+    </>
   );
-
-  return <Arrowup />;
-}
+};
+export default ArrowUp;

@@ -55,7 +55,6 @@ function User() {
                                 <Text textTransform={"uppercase"} w={10} borderRadius={"50%"} py={'0.4rem'} fontSize={20} textAlign={'center'}>
                                     {user && user.firstname[0]} {user && user.lastname[0]}
                                 </Text>
-
                         }
                     </MenuButton>
                     <MenuList alignItems={'center'}>
